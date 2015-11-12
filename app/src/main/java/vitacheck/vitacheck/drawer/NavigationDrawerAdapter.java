@@ -1,4 +1,4 @@
-package vitacheck.vitacheck;
+package vitacheck.vitacheck.drawer;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import vitacheck.vitacheck.R;
 
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {

@@ -1,4 +1,4 @@
-package vitacheck.vitacheck;
+package vitacheck.vitacheck.drawer;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import vitacheck.vitacheck.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
