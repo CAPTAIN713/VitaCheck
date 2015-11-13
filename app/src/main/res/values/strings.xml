@@ -18,7 +18,7 @@
     <string name="prompt_password_confirm">Confirm Password</string>
     <string name="prompt_dob">Date of Birth</string>
     <string name="prompt_weight">Weight</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Account Registration</string>
 
     <!--  Strings related to doctors -->
     <string name="doctor">Doctor</string>

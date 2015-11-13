@@ -30,6 +30,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +106,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        // Enable Local Datastore.
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
     }
 
     private void populateAutoComplete() {
@@ -366,6 +373,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 //go to main activity
+
+                ParseObject testObject = new ParseObject("TestObject");
+                testObject.put("foo", "bar");
+                testObject.saveInBackground();
+
                 Intent myIntent = new Intent(LoginActivity.this ,MainActivity.class);
                 startActivity(myIntent);
                 finish();
