@@ -16,7 +16,7 @@ import vitacheck.vitacheck.R;
 
 public class DoctorsFragment extends Fragment {
 
-    /*video on recylerView can be found here: https://www.youtube.com/watch?v=Wq2o4EbM74k*/
+    /*video on recylerView can be found here: https://www.youtube.com/watch?v=Wq2o4EbM74k   */
     private RecyclerView recyclerView;
     private DoctorAdapter adapter;
 

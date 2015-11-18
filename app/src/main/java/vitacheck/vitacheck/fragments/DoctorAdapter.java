@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,11 +51,16 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
     }
 
     @Override
-    public int getItemCount() {
-        return doctorList.size();
+    public int getItemCount() {   return doctorList.size();}
+
+    public void deleteDoctor(int position){
+        /*look up notifyDataSetChanged() method (use as last resort) instead use
+        * more specific changes, read more on it you'll find out*/
+        doctorList.remove(position);
+        notifyItemRemoved(position);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         /*stuff that i want to be displayed in the recyclerview*/
         TextView doctorName;
@@ -65,6 +71,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
             super(itemView);
             doctorName= (TextView) itemView.findViewById(R.id.doctorNameField);
             doctorTypeSubText= (TextView) itemView.findViewById(R.id.doctorTypeField);
+            doctorName.setOnClickListener(this);
+            doctorTypeSubText.setOnClickListener(this);
+        }
+
+        @Override
+        /*video on how to handle recycler clicks found here: https://www.youtube.com/watch?v=zE1E1HOK_E4   */
+        public void onClick(View v) {
+            deleteDoctor(getPosition());
         }
     }
 
