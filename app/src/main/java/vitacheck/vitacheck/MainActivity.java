@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.Parse;
+
 import vitacheck.vitacheck.drawer.*;
 import vitacheck.vitacheck.fragments.*;
 
@@ -38,6 +40,10 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
         mNavigationDrawerFragment.setUserData("John Doe", "johndoe@doe.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
+
+        // Enable Local Datastore.
+        //Parse.enableLocalDatastore(this);
+        //Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
     }
 
     @Override
