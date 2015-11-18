@@ -18,18 +18,22 @@ import vitacheck.vitacheck.R;
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
-    private List<DoctorSavedDoctorInfo> data= Collections.emptyList();
+    /*i used emptyList() so that there is no null expect error if data does not load*/
+    private List<DoctorSavedDoctorInfo> doctorList= Collections.emptyList();
 
     public DoctorAdapter(Context context, List<DoctorSavedDoctorInfo> data){
+        /*inflates the recyclerview_doctor_row xml file*/
         inflater=LayoutInflater.from(context);
-        this.data=data;
+        this.doctorList=data;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {/*called when recyclerView needs a new RecyclerView.ViewHolder of a given type to represent an item*/
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    /*called when recyclerView needs a new RecyclerView.ViewHolder of a given type to represent an item*/
+        /*view represents the root of the recyclerview_doctor_row xml file*/
         View view=inflater.inflate(R.layout.recyclerview_doctor_row,parent, false);
 
+        /*passes the view (root) to the view holder class. view holder class is at the bottom*/
         MyViewHolder holder = new MyViewHolder(view);
 
         return holder;
@@ -37,18 +41,22 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        DoctorSavedDoctorInfo current = data.get(position);
+        /*gets data, notice current is a doctor info object class*/
+        DoctorSavedDoctorInfo current = doctorList.get(position);
+
+        /*sets data that will be displayed in the recyclerview_doctor_row xml file*/
         holder.doctorName.setText(current.getName());
         holder.doctorTypeSubText.setText(current.getDoctorType());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return doctorList.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
+        /*stuff that i want to be displayed in the recyclerview*/
         TextView doctorName;
         TextView doctorTypeSubText;
 
