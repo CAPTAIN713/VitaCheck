@@ -16,6 +16,10 @@ public class DoctorSavedDoctorInfo {
     private String address;
     private String websiteLink;
     private Date appointmentDate;
+    private String parseID;
+
+    public String getParseID() {return parseID;}
+    public void setParseID(String id) {this.parseID=id;}
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}

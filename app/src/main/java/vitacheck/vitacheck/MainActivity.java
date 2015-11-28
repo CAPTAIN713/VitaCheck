@@ -12,22 +12,24 @@ import android.view.MenuItem;
 
 import com.parse.Parse;
 
+
 import vitacheck.vitacheck.drawer.*;
 import vitacheck.vitacheck.fragments.*;
 
 
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerCallbacks {
-
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Enable Local Datastore.
+        //Parse.enableLocalDatastore(this);
+        //Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
@@ -41,9 +43,6 @@ public class MainActivity extends ActionBarActivity
         // populate the navigation drawer
         mNavigationDrawerFragment.setUserData("John Doe", "johndoe@doe.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
 
-        // Enable Local Datastore.
-        //Parse.enableLocalDatastore(this);
-        //Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
     }
 
     @Override
