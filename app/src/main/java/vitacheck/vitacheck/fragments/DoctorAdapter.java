@@ -20,9 +20,9 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
 
     private LayoutInflater inflater;
     /*i used emptyList() so that there is no null expect error if data does not load*/
-    private List<DoctorSavedDoctorInfo> doctorList= Collections.emptyList();
+    private List<DoctorInfo> doctorList;//= Collections.emptyList();
 
-    public DoctorAdapter(Context context, List<DoctorSavedDoctorInfo> data){
+    public DoctorAdapter(Context context, List<DoctorInfo> data){
         /*inflates the recyclerview_doctor_row xml file*/
         inflater=LayoutInflater.from(context);
         this.doctorList=data;
@@ -43,7 +43,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         /*gets data, notice current is a doctor info object class*/
-        DoctorSavedDoctorInfo current = doctorList.get(position);
+        DoctorInfo current = doctorList.get(position);
 
         /*sets data that will be displayed in the recyclerview_doctor_row xml file*/
         holder.doctorName.setText(current.getName());
@@ -71,8 +71,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
             super(itemView);
             doctorName= (TextView) itemView.findViewById(R.id.doctorNameField);
             doctorTypeSubText= (TextView) itemView.findViewById(R.id.doctorTypeField);
-            doctorName.setOnClickListener(this);
-            doctorTypeSubText.setOnClickListener(this);
+            //doctorName.setOnClickListener(this);
+            //doctorTypeSubText.setOnClickListener(this);
         }
 
         @Override
