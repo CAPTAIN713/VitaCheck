@@ -1,6 +1,7 @@
 package vitacheck.vitacheck;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Enable Local Datastore.
@@ -55,7 +57,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragment = new HomeFragment();
                 break;
             case 1:
-                fragment = new DoctorsFragment();
+                //fragment = new DoctorsFragment();
+                //fragment = new DoctorFragmentIndivualPage();
+                //fragment = new DoctorFragmentEditPage();
+                //fragment = new DoctorFragmentSaveNewDoc();
                 break;
             case 2:
                 fragment = new MedicineFragment();

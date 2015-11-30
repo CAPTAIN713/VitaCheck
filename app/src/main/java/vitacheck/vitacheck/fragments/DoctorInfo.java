@@ -28,8 +28,8 @@ public class DoctorInfo extends ParseObject {
     public String getInsurance() {return getString("insurance_type");}
     public void setInsurance(String IT) {put("insurance_type",IT);}
 
-    public int getPhoneNum() {return getInt("phone_number");}
-    public void setPhoneNum(String num) {put("phone_number",num);}
+    public Long getPhoneNum() {return getLong("phone_number");}
+    public void setPhoneNum(Long num) {put("phone_number",num);}
 
     public String getEmail() {return getString("email");}
     public void setEmail(String mail) {put("email",mail);}

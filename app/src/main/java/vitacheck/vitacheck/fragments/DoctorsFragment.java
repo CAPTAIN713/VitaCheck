@@ -73,7 +73,7 @@ public class DoctorsFragment extends Fragment {
     * Used just to load hard code test data. this is more than likely how we will
     * get data from parse and load it into the classes
     * */
-    public static List<DoctorSavedDoctorInfo> getData() {
+    /*public static List<DoctorSavedDoctorInfo> getData() {
 
         List<DoctorSavedDoctorInfo> data = new ArrayList<>();
         String[] titles = {"Sarge", "Church", "youtube", "blarg", "caboose", "reds", "blues", "RvB", "Rooster", "Teeth", "delta", "echo", "alpha", "omega"};
@@ -84,7 +84,7 @@ public class DoctorsFragment extends Fragment {
             data.add(current);
         }
         return data;
-    }
+    }*/
 
     
 }//end of DoctorsFragment class

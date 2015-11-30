@@ -1,30 +1,34 @@
 package vitacheck.vitacheck.fragments;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
 
 import vitacheck.vitacheck.R;
 
+import vitacheck.vitacheck.fragments.*;
 /**
  * Created by ERIC on 11/17/2015.
  */
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
+    private final Context doctorContext;
     /*i used emptyList() so that there is no null expect error if data does not load*/
     private List<DoctorInfo> doctorList;//= Collections.emptyList();
 
     public DoctorAdapter(Context context, List<DoctorInfo> data){
         /*inflates the recyclerview_doctor_row xml file*/
         inflater=LayoutInflater.from(context);
+        doctorContext=context;
         this.doctorList=data;
     }
 
@@ -60,7 +64,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
         notifyItemRemoved(position);
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         /*stuff that i want to be displayed in the recyclerview*/
         TextView doctorName;
@@ -71,14 +75,22 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.MyViewHold
             super(itemView);
             doctorName= (TextView) itemView.findViewById(R.id.doctorNameField);
             doctorTypeSubText= (TextView) itemView.findViewById(R.id.doctorTypeField);
-            //doctorName.setOnClickListener(this);
-            //doctorTypeSubText.setOnClickListener(this);
+            doctorName.setOnClickListener(this);
+            doctorName.setOnLongClickListener(this);
+            doctorTypeSubText.setOnClickListener(this);
+            doctorTypeSubText.setOnLongClickListener(this);
         }
 
         @Override
         /*video on how to handle recycler clicks found here: https://www.youtube.com/watch?v=zE1E1HOK_E4   */
         public void onClick(View v) {
-            deleteDoctor(getPosition());
+            //deleteDoctor(getPosition());
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
         }
     }
 
