@@ -84,6 +84,7 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
             case R.id.doctorSaveEditChanges:
                 if((doctorNameTB.getText().toString()).compareTo("")==0){
                     Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
+                    break;
                 }
                 ParseObject.registerSubclass(DoctorInfo.class);
                 ParseQuery<DoctorInfo> query = ParseQuery.getQuery("doctor");

@@ -374,9 +374,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 //go to main activity
 
-                ParseObject testObject = new ParseObject("TestObject");
-                testObject.put("foo", "bar");
-                testObject.saveInBackground();
+                //ParseObject testObject = new ParseObject("TestObject");
+                //testObject.put("foo", "bar");
+                //testObject.saveInBackground();
 
                 Intent myIntent = new Intent(LoginActivity.this ,MainActivity.class);
                 startActivity(myIntent);
