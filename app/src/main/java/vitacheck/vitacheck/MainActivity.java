@@ -64,7 +64,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragment = new VitalsFragment();
                 break;
             case 4:
-                fragment = new DietFragment();
+                //fragment = new DietFragment();
+                //fragment= new DietFoodFragment();
+                fragment= new DietAddFoodFragment();
+                //fragment= new DietRecipeFragment();
+                //fragment= new DietAddRecipeFragment();
+                //fragment= new DietHealthArticleFragment();
+                //fragment= new DietAddHealthArticleFragment();
                 break;
             default:
                 break;
@@ -115,6 +121,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }
