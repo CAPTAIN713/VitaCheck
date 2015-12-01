@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case 4:
                 //fragment = new DietFragment();
                 //fragment= new DietFoodFragment();
-                fragment= new DietAddFoodFragment();
+                //fragment= new DietAddFoodFragment();
                 //fragment= new DietRecipeFragment();
                 //fragment= new DietAddRecipeFragment();
                 //fragment= new DietHealthArticleFragment();
