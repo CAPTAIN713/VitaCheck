@@ -1,6 +1,7 @@
 package vitacheck.vitacheck.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,8 +33,23 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
     private EditText addressTB,websiteTB,visitDateTB;
     private Button saveButton;
 
+    private String selectedItemParseID;
+    private  Bundle extrasBundle;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+        extrasBundle = getArguments();
+
+        if( !(extrasBundle.isEmpty()) && (extrasBundle.containsKey("parseID")) ){
+            //checks if bundle is empty and if it has the parse id string
+            selectedItemParseID=extrasBundle.getString("parseID");
+        }
+        else{
+            //either bundle was empty or did not have parse id. should find a way to go back to previous activity
+            //put finish()
+        }
 
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_doctor_edit_page, container, false);
@@ -54,7 +70,7 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
 
         ParseObject.registerSubclass(DoctorInfo.class);
         ParseQuery<DoctorInfo> query = ParseQuery.getQuery("doctor");
-        query.getInBackground("OslWwXOJfA", new GetCallback<DoctorInfo>() {
+        query.getInBackground(selectedItemParseID, new GetCallback<DoctorInfo>() {
             @Override
             public void done(DoctorInfo object, ParseException e) {
                 if(e==null){
@@ -88,7 +104,7 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                 }
                 ParseObject.registerSubclass(DoctorInfo.class);
                 ParseQuery<DoctorInfo> query = ParseQuery.getQuery("doctor");
-                query.getInBackground("OslWwXOJfA", new GetCallback<DoctorInfo>() {
+                query.getInBackground(selectedItemParseID, new GetCallback<DoctorInfo>() {
                     @Override
                     public void done(DoctorInfo object, ParseException e) {
                         if (e == null) {
@@ -106,7 +122,12 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                         }
                     }
                 });
-
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                Fragment doctorFragment = new DoctorFragmentIndividualPage();
+                //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
+                doctorFragment.setArguments(extrasBundle);
+                transaction.replace(R.id.doctorActivityContainer, doctorFragment);
+                transaction.commit();
                 break;
 
         }
