@@ -11,13 +11,14 @@ import java.util.Date;
 //the ParseClassName must be the as the parse table name
 @ParseClassName("doctor")
 public class DoctorInfo extends ParseObject {
+    String id;
     /*create a new class to hold what every data you are working with.
     * follow the same set up as this class. have a get and set for every object you need
     * to get from parse. in the getString() and put() the item in the " " must be the same
     * as the column name that is in the parse table.
     *   -eric*/
-    public String getObjectID() {return getString("objectId");}
-    public void setObjectID(String id) {put("objectId",id);}
+    public String getParseId() { return id;}
+    public void setParseId(String ID) { id=ID;}
 
     public String getName() {return getString("doctor_name");}
     public void setName(String name) {put("doctor_name",name);}

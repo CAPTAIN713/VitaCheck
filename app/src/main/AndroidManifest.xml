@@ -28,11 +28,20 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_home"></activity>
-        <activity android:name=".fragments.EditActivity"></activity>
+            android:label="@string/title_activity_home" />
+        <activity android:name=".fragments.DoctorActivity" />
+        <activity android:name=".fragments.VitalSignsActivity" />
+        <activity
+            android:name=".fragments.MedicineActivity"
+            android:label="@string/title_activity_medicine"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".fragments.DietActivity"
+            android:label="@string/title_activity_diet"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

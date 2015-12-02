@@ -57,10 +57,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragment = new HomeFragment();
                 break;
             case 1:
-                //fragment = new DoctorsFragment();
-                //fragment = new DoctorFragmentIndivualPage();
-                //fragment = new DoctorFragmentEditPage();
-                //fragment = new DoctorFragmentSaveNewDoc();
+                fragment = new DoctorsFragment();
                 break;
             case 2:
                 fragment = new MedicineFragment();
