@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import vitacheck.vitacheck.R;
 
+
 public class DietFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
