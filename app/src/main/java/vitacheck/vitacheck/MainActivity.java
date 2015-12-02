@@ -1,7 +1,6 @@
 package vitacheck.vitacheck;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -10,8 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.parse.Parse;
+import com.parse.ParseUser;
 
 
 import vitacheck.vitacheck.drawer.*;
@@ -43,7 +41,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         // Set up the drawer.
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
-        mNavigationDrawerFragment.setUserData("John Doe", "johndoe@doe.com", BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        mNavigationDrawerFragment.setUserData(currentUser.get("name").toString(), currentUser.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
 
     }
 

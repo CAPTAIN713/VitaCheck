@@ -1,9 +1,5 @@
 package vitacheck.vitacheck;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -56,7 +52,10 @@ public class RegisterActivity extends AppCompatActivity {
         // Save new user data into Parse.com Data Storage
         ParseUser user = new ParseUser();
         user.setUsername(email);
+        user.setEmail(email);
         user.setPassword(password);
+        user.put("name", name);
+
         user.signUpInBackground();
 
         new android.os.Handler().postDelayed(
@@ -85,14 +84,16 @@ public class RegisterActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (name.isEmpty() || name.length() < 5) {
-            _nameText.setError("at least 5 characters");
+        if (name.isEmpty() || name.length() < 3) {
+            mProgressView.setVisibility(View.GONE);
+            _nameText.setError("at least 3 characters");
             valid = false;
         } else {
             _nameText.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mProgressView.setVisibility(View.GONE);
             _emailText.setError("enter a valid email address");
             valid = false;
         } else {
@@ -100,6 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
+            mProgressView.setVisibility(View.GONE);
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {

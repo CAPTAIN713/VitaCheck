@@ -359,6 +359,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             });
 
+            // Necessary for Parse verification
             SystemClock.sleep(1000);
 
             return flag;

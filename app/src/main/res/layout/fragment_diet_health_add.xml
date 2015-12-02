@@ -24,4 +24,13 @@
         android:ems="10"
         android:id="@+id/health_description"
         android:text="Description" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/saveHealthButton"
+        android:layout_gravity="center_horizontal" />
+
+
 </LinearLayout>
