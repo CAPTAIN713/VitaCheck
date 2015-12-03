@@ -5,9 +5,9 @@
     android:touchscreenBlocksFocus="false"
     android:weightSum="1">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
@@ -22,13 +22,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorNameIndv" />
+            android:id="@+id/doctorNameIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorName" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -43,12 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorTypeIndv" />
-    </LinearLayout>
+            android:id="@+id/doctorTypeIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorType"/>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -63,12 +67,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorInsuranceIndv" />
-    </LinearLayout>
+            android:id="@+id/doctorInsuranceIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorInsurance"/>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contextClickable="true"
         android:clickable="true">
@@ -87,12 +93,22 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/doctorPhoneNumberIndv"
             android:phoneNumber="false"
-            android:contextClickable="false" />
-    </LinearLayout>
+            android:contextClickable="false"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorPhoneNumber"/>
 
-    <LinearLayout
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/doctorPhoneCallButton"
+            android:src="@android:drawable/sym_action_call"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -107,12 +123,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorEmailIndv" />
-    </LinearLayout>
+            android:id="@+id/doctorEmailIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorEmail"/>
 
-    <LinearLayout
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/doctorEmailButton"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@android:drawable/sym_action_email" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -127,12 +154,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorAddressIndv" />
-    </LinearLayout>
+            android:id="@+id/doctorAddressIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorAddress"
+            android:textColor="#5771f0"
+            android:text="fdsg" />
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -147,12 +178,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorWebsiteIndv" />
-    </LinearLayout>
+            android:id="@+id/doctorWebsiteIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/doctorWebsite"
+            android:text="adfasdfdf"
+            android:textColor="#5771f0" />
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -167,8 +202,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/doctorVistDatesIndv" />
-    </LinearLayout>
+            android:id="@+id/doctorVistDatesIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/dcotorVistDates"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
