@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +53,14 @@ public class DoctorsFragment extends Fragment {
 
                 for (DoctorInfo doc : objects) {
                     DoctorInfo newdoc = new DoctorInfo();
+                    newdoc.setParseId(doc.getObjectId());
                     newdoc.setName(doc.getName());
                     newdoc.setDoctorType(doc.getDoctorType());
+                    /*newdoc.setInsurance(doc.getInsurance());
+                    newdoc.setPhoneNum(doc.getPhoneNum());
+                    newdoc.setEmail(doc.getEmail());
+                    newdoc.setAddress(doc.getAddress());
+                    newdoc.setURL(doc.getURL());*/
                     doctorParseList.add(newdoc);
                 }
                 /*have to make adapter and set here because if set outside done method and after
@@ -73,7 +79,7 @@ public class DoctorsFragment extends Fragment {
     * Used just to load hard code test data. this is more than likely how we will
     * get data from parse and load it into the classes
     * */
-    public static List<DoctorSavedDoctorInfo> getData() {
+    /*public static List<DoctorSavedDoctorInfo> getData() {
 
         List<DoctorSavedDoctorInfo> data = new ArrayList<>();
         String[] titles = {"Sarge", "Church", "youtube", "blarg", "caboose", "reds", "blues", "RvB", "Rooster", "Teeth", "delta", "echo", "alpha", "omega"};
@@ -84,7 +90,7 @@ public class DoctorsFragment extends Fragment {
             data.add(current);
         }
         return data;
-    }
+    }*/
 
     
 }//end of DoctorsFragment class
