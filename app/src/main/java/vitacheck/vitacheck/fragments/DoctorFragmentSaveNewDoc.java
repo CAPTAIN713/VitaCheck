@@ -1,6 +1,7 @@
 package vitacheck.vitacheck.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -77,6 +78,10 @@ public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickL
                 newDoctor.saveInBackground();
                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
 
+                Fragment fragment = new DoctorsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.commit();
                 break;
         }
     }

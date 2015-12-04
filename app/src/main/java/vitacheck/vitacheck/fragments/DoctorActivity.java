@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import vitacheck.vitacheck.R;
@@ -21,7 +24,6 @@ public class DoctorActivity extends AppCompatActivity {
 
         Intent intentExtras = getIntent();
         extrasBundle = intentExtras.getExtras();
-
 
         if( !(extrasBundle.isEmpty()) && (extrasBundle.containsKey("parseID")) ){
             //checks if bundle is empty and if it has the parse id string

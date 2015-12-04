@@ -122,12 +122,12 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                         }
                     }
                 });
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                /*FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 Fragment doctorFragment = new DoctorFragmentIndividualPage();
                 //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
                 doctorFragment.setArguments(extrasBundle);
                 transaction.replace(R.id.doctorActivityContainer, doctorFragment);
-                transaction.commit();
+                transaction.commit();*/
                 break;
 
         }
