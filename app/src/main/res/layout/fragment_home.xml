@@ -3,13 +3,18 @@
     android:layout_height="match_parent" tools:context="vitacheck.vitacheck.fragments.DoctorsFragment"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
+
+    <!-- UNCOMMENT AT OWN RISK
+         EMULATOR WILL SKIP FRAMES
+         RUN SLOW AND CRASH YOUR PC
+         WORKS FINE ON PHONES THOUGH
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical" >
 
-        <!-- A CardView that contains a TextView -->
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view_health"
@@ -41,7 +46,7 @@
 
         </android.support.v7.widget.CardView>
 
-        <!-- A CardView that contains a TextView -->
+
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
@@ -62,5 +67,8 @@
 
         </android.support.v7.widget.CardView>
     </LinearLayout>
+
+    -->
+
 
 </FrameLayout>
