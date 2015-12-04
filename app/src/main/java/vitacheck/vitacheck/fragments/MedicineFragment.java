@@ -1,13 +1,18 @@
 package vitacheck.vitacheck.fragments;
 
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -30,6 +35,7 @@ public class MedicineFragment extends Fragment {
     private MedicineAdapter adapter;
 
     private List<MedicineInfo> medicineParseList = new ArrayList<MedicineInfo>();
+    private FloatingActionButton addMedicineButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +45,7 @@ public class MedicineFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_medicine, container, false);
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.medicinesList);
+        addMedicineButton = (FloatingActionButton) layout.findViewById(R.id.medicineAddMedicineButton);
 
         /*sets the layout on how we want the data to be displayed
         * if we wanted to we could set it to grid or staggered layout but in this case
@@ -73,27 +80,19 @@ public class MedicineFragment extends Fragment {
                 adapter = new MedicineAdapter(getActivity(), medicineParseList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                addMedicineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment fragment = new MedicineFragmentSaveNewMed();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.container, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                });
             }
         });
         return layout;
     }
-
-    /*
-    * Used just to load hard code test data. this is more than likely how we will
-    * get data from parse and load it into the classes
-    * */
-    /*public static List<DoctorSavedDoctorInfo> getData() {
-
-        List<DoctorSavedDoctorInfo> data = new ArrayList<>();
-        String[] titles = {"Sarge", "Church", "youtube", "blarg", "caboose", "reds", "blues", "RvB", "Rooster", "Teeth", "delta", "echo", "alpha", "omega"};
-        for (int i = 0; i < titles.length; i++) {
-            DoctorSavedDoctorInfo current = new DoctorSavedDoctorInfo();
-            current.setName(titles[i]);
-            current.setDoctorType(titles[i]);
-            data.add(current);
-        }
-        return data;
-    }*/
-
-
 }//end of DoctorsFragment class

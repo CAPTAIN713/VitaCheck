@@ -19,7 +19,34 @@ import com.parse.ParseQuery;
 
 import java.text.DateFormat;
 
+import vitacheck.vitacheck.LoginActivity;
 import vitacheck.vitacheck.R;
+
+import java.util.Calendar;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+
+
+import android.app.Activity;
+
+import android.app.AlarmManager;
+
+import android.app.PendingIntent;
+
+import android.content.Intent;
+
+import android.os.Bundle;
+
+import android.os.SystemClock;
+
+import android.view.View;
+
+import android.widget.Button;
+
+import android.widget.Toast;
 
 /**
  * Created by Robert on 12/3/2015.
@@ -30,7 +57,7 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
     private String selectedMedicineParseId;
 
     private EditText medicineNameTB,medicineNoteTB,dosageAmountTB,dosagePerDayTB,prescribedByTB;
-    private Button saveButton;
+    private Button saveButton, alarmButton;
 
     private String selectedItemParseID;
     private  Bundle extrasBundle;
@@ -62,8 +89,10 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
 
 
         saveButton = (Button) layout.findViewById(R.id.medicineSaveEditChanges);
+        alarmButton = (Button) layout.findViewById(R.id.alarm);
 
         saveButton.setOnClickListener(this);
+        alarmButton.setOnClickListener(this);
 
         ParseObject.registerSubclass(MedicineInfo.class);
         ParseQuery<MedicineInfo> query = ParseQuery.getQuery("medicine");
@@ -120,8 +149,15 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                 transaction.replace(R.id.medicineActivityContainer, medicineFragment);
                 transaction.commit();
                 break;
+            case R.id.alarm:
+                Context baseContext = getActivity().getApplicationContext();
+                Intent intent = new Intent(context, AlarmReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+                AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pendingIntent);
+                Toast.makeText(context, "Alarm set for 5sec", Toast.LENGTH_LONG).show();
+                break;
 
         }
     }
-
 }//end of DoctorsFragment class
