@@ -97,6 +97,7 @@ public class DoctorFragmentIndividualPage extends Fragment implements View.OnCli
         websiteTB.setOnClickListener(this);
         addressTB.setOnClickListener(this);
 
+
         ParseObject.registerSubclass(DoctorInfo.class);
         ParseQuery<DoctorInfo> query = ParseQuery.getQuery("doctor");
         query.getInBackground(selectedItemParseID, new GetCallback<DoctorInfo>() {
