@@ -23,6 +23,11 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mWeightText;
     ProgressDialog mDialog;
 
+    boolean slash = false;
+    boolean dash = false;
+    SimpleDateFormat slashformat;
+    SimpleDateFormat dashformat;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         mDialog.setCancelable(false);
         mDialog.show();
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         Date date = null;
 
         String name = mNameText.getText().toString();
@@ -62,10 +67,14 @@ public class RegisterActivity extends AppCompatActivity {
         String password = mPasswordText.getText().toString();
         String sWeight = mWeightText.getText().toString();
         Double weight = Double.parseDouble(sWeight);
-        // try{date = format.parse(mDoBText.getText().toString());}
-        // catch (Exception e) {}
 
-        // TODO: CREATE VALIDATORS FOR DATE/WEIGHT
+        if (dash)
+            try {date = dashformat.parse(mDoBText.getText().toString());}
+            catch (Exception e) {}
+
+        if(slash)
+            try {date = slashformat.parse(mDoBText.getText().toString());}
+            catch (Exception e) {}
 
         // Save new user data into Parse.com Data Storage
         ParseUser user = new ParseUser();
@@ -73,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.setEmail(email);
         user.setPassword(password);
         user.put("name", name);
-        //user.put("date", date);
+        user.put("date", date);
         user.put("weight", weight);
         user.signUpInBackground();
 
@@ -102,6 +111,18 @@ public class RegisterActivity extends AppCompatActivity {
         String name = mNameText.getText().toString();
         String email = mEmailText.getText().toString();
         String password = mPasswordText.getText().toString();
+        String dateofbirth = mDoBText.getText().toString();
+        String sweight = mWeightText.getText().toString();
+
+        try {
+            slashformat = new SimpleDateFormat("MM/dd/yyyy");
+            slash = true;
+        } catch (Exception e) {}
+
+        try {
+            dashformat = new SimpleDateFormat("MM-dd-yyyy");
+            dash = true;
+        } catch (Exception e) {}
 
         if (name.isEmpty() || name.length() < 3) {
             mNameText.setError("at least 3 characters");
@@ -122,6 +143,26 @@ public class RegisterActivity extends AppCompatActivity {
             valid = false;
         } else {
             mPasswordText.setError(null);
+        }
+
+        if (dateofbirth.isEmpty() || (!slash && !dash)) {
+            mDoBText.setError("enter a valid date");
+            valid = false;
+        } else {
+            mDoBText.setError(null);
+        }
+
+        if (sweight.isEmpty()) {
+            mWeightText.setError("between 100 and 400");
+            valid = false;
+        } else {
+            Double weight = Double.parseDouble(sweight);
+            if (weight < 100.00 || weight > 400.00) {
+                mWeightText.setError("between 100 and 400");
+                valid = false;
+            } else {
+                mWeightText.setError(null);
+            }
         }
 
         return valid;

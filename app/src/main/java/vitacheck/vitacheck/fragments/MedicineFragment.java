@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import vitacheck.vitacheck.MainActivity;
 import vitacheck.vitacheck.R;
 
 public class MedicineFragment extends Fragment {
@@ -32,6 +33,7 @@ public class MedicineFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).setTitle("Medicine");
 
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_medicine, container, false);

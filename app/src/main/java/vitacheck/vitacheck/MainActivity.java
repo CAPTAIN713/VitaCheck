@@ -30,6 +30,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
 
+    public void setTitle(String title){
+        mToolbar.setTitle(title);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Enable Local Datastore.
@@ -142,7 +146,4 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

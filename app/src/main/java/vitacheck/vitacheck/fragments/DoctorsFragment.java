@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import vitacheck.vitacheck.MainActivity;
 import vitacheck.vitacheck.R;
 
 public class DoctorsFragment extends Fragment{
@@ -38,6 +39,7 @@ public class DoctorsFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).setTitle("Doctors");
 
         doctorParseList = new ArrayList<DoctorInfo>();
 
