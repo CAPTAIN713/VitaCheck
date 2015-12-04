@@ -4,6 +4,7 @@ package vitacheck.vitacheck.fragments;
  * Created by ERIC on 11/20/2015.
  */
 import com.parse.Parse;
+import com.parse.ParseUser;
 import com.parse.ParseObject;
 
 public class ParseApplication extends android.app.Application {
