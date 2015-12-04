@@ -45,7 +45,8 @@
             android:name=".fragments.DietActivity"
             android:label="@string/title_activity_diet"
             android:theme="@style/AppTheme"></activity>
-        <receiver android:name=".fragments.AlarmReceiver" android:process=":remote" />
+        <activity android:name=".fragments.MedicineActivityAlarmPopup"
+            android:theme="@style/AppTheme.AlarmPopup"></activity>
     </application>
 
 
