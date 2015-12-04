@@ -41,6 +41,8 @@ public class MedicineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((MainActivity) getActivity()).setTitle("Medicine");
 
+        medicineParseList = new ArrayList<MedicineInfo>();
+
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_medicine, container, false);
 

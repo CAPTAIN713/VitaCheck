@@ -23,6 +23,8 @@ import vitacheck.vitacheck.LoginActivity;
 import vitacheck.vitacheck.R;
 
 import java.util.Calendar;
+import java.util.Random;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -132,7 +134,7 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                     public void done(MedicineInfo object, ParseException e) {
                         if (e == null) {
                             //something went right
-                            object.setName((medicineNameTB.getText().toString()));
+                            object.setName(medicineNameTB.getText().toString());
                             object.setNote(medicineNoteTB.getText().toString());
                             object.setDosageAmount(Integer.parseInt(dosageAmountTB.getText().toString()));
                             object.setDosagePerDay(Integer.parseInt(dosagePerDayTB.getText().toString()));
@@ -151,11 +153,14 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                 break;
             case R.id.alarm:
                 Context baseContext = getActivity().getApplicationContext();
-                Intent intent = new Intent(context, AlarmReceiver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+                Intent intent = new Intent(context, MedicineActivityAlarmPopup.class);
+                intent.putExtra("name", medicineNameTB.getText().toString());
+                intent.putExtra("dosage", dosageAmountTB.getText().toString());
+                int id = new Random().nextInt(100);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, pendingIntent);
-                Toast.makeText(context, "Alarm set for 5sec", Toast.LENGTH_LONG).show();
+                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+10000, pendingIntent);
+                Toast.makeText(context, "Alarm set for 10sec", Toast.LENGTH_LONG).show();
                 break;
 
         }
