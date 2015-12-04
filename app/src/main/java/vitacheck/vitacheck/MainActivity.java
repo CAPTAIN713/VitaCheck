@@ -30,6 +30,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private Toolbar mToolbar;
 
+    public void setTitle(String title){
+        mToolbar.setTitle(title);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Enable Local Datastore.
@@ -47,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
         ParseUser currentUser = ParseUser.getCurrentUser();
-        mNavigationDrawerFragment.setUserData(currentUser.get("name").toString(), currentUser.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.heart_ic_launcher));
+        mNavigationDrawerFragment.setUserData(currentUser.get("name").toString(), currentUser.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
 
     }
 
@@ -142,7 +146,4 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }
