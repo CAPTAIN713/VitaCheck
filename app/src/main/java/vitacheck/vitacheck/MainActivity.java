@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
         // populate the navigation drawer
         ParseUser currentUser = ParseUser.getCurrentUser();
-        mNavigationDrawerFragment.setUserData(currentUser.get("name").toString(), currentUser.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.avatar));
+        mNavigationDrawerFragment.setUserData(currentUser.get("name").toString(), currentUser.getEmail(), BitmapFactory.decodeResource(getResources(), R.drawable.heart_ic_launcher));
 
     }
 
