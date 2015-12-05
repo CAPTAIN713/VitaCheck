@@ -45,8 +45,17 @@
             android:label="@string/title_activity_medicine"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".fragments.DietActivity"
-            android:label="@string/title_activity_diet"
+            android:name=".fragments.DietFoodActivity"
+            android:label="DietFoodActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".fragments.DietRecipeActivity"
+            android:label="DietRecipeActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".fragments.DietHealthArticleActivity"
+            android:label="DietHealthArticleActivity"
             android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".fragments.MedicineActivityAlarmPopup"

@@ -21,6 +21,7 @@ public class DietAddRecipeFragment extends Fragment {
     private EditText mRecipeURL;
     private EditText mRecipeDescription;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -33,7 +34,7 @@ public class DietAddRecipeFragment extends Fragment {
             mRecipeName = (EditText) getView().findViewById(R.id.recipe_name);
             mRecipeURL = (EditText) getView().findViewById(R.id.recipe_URL);
             mRecipeDescription = (EditText) getView().findViewById(R.id.recipe_description);
-            ParseObject recipe = new ParseObject("diet_recipe");
+            DietRecipeInfo recipe = new DietRecipeInfo();
             recipe.put("name", mRecipeName.getText().toString());
             recipe.put("URL", mRecipeURL.getText().toString());
             recipe.put("note", mRecipeDescription.getText().toString());
@@ -46,8 +47,4 @@ public class DietAddRecipeFragment extends Fragment {
         return view;
     }
 
-    private void saveRecipe()
-    {
-
-    }
 }

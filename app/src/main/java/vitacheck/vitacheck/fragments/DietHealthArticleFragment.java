@@ -1,5 +1,6 @@
 package vitacheck.vitacheck.fragments;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -27,7 +29,7 @@ public class DietHealthArticleFragment extends Fragment {
     /*video on recylerView can be found here: https://www.youtube.com/watch?v=Wq2o4EbM74k   */
     private RecyclerView recyclerView;
     private DietHealthArticleAdapter adapter;
-
+    private Button addHealthButton;
     private List<DietHealthArticleInfo> dietHealthParseList = new ArrayList<DietHealthArticleInfo>();
 
     @Override
@@ -54,6 +56,7 @@ public class DietHealthArticleFragment extends Fragment {
                 for (DietHealthArticleInfo health: objects)
                 {
                     DietHealthArticleInfo newhealth = new DietHealthArticleInfo();
+                    newhealth.setParseID(health.getObjectId());
                     newhealth.setHealthName(health.getHealthName());
                     newhealth.setHealthURL(health.getHealthURL());
                     newhealth.setHealthDescription(health.getHealthDescription());
@@ -72,6 +75,20 @@ public class DietHealthArticleFragment extends Fragment {
         });
 
 
+
+
+        addHealthButton = (Button) layout.findViewById(R.id.addHealthButton);
+        addHealthButton.setOnClickListener(new View.OnClickListener() {
+            Fragment fragment = null;
+
+            @Override
+            public void onClick(View v) {
+                fragment = new DietAddHealthArticleFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.commit();
+            }
+        });
         return layout;
     }
 

@@ -10,21 +10,22 @@
         android:layout_width="347dp"
         android:layout_height="188dp"
         android:text="food"
-        android:id="@+id/button"
+        android:id="@+id/foodButton"
         android:layout_gravity="center_horizontal|top" />
 
     <Button
         android:layout_width="353dp"
         android:layout_height="198dp"
         android:text="recipes"
-        android:id="@+id/button2"
+        android:id="@+id/recipeButton"
         android:layout_gravity="center" />
 
     <Button
         android:layout_width="348dp"
         android:layout_height="184dp"
         android:text="health articles"
-        android:id="@+id/button3"
+        android:id="@+id/healthButton"
         android:layout_gravity="center_horizontal|bottom" />
+
 
 </FrameLayout>
