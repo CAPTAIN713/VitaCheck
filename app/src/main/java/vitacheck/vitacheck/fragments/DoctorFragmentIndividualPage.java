@@ -115,7 +115,7 @@ public class DoctorFragmentIndividualPage extends Fragment implements View.OnCli
                     address=String.valueOf(object.getAddress());
                     websiteTB.setText(object.getURL());
                     doctorWebsite=String.valueOf(object.getURL());
-                    visitDateTB.setText(DateFormat.getDateInstance().format(object.getVisitDate()));
+                    //visitDateTB.setText(DateFormat.getDateInstance().format(object.getVisitDate()));
                 }
                 else{
                     //someting went wrong
