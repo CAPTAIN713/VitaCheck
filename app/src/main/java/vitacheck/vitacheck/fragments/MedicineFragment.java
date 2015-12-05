@@ -63,16 +63,18 @@ public class MedicineFragment extends Fragment {
                 }
 
                 for (MedicineInfo med : objects) {
-                    MedicineInfo newmed = new MedicineInfo();
-                    newmed.setParseId(med.getObjectId());
-                    newmed.setName(med.getName());
-                    newmed.setNote(med.getNote());
-                    /*newdoc.setInsurance(doc.getInsurance());
-                    newdoc.setPhoneNum(doc.getPhoneNum());
-                    newdoc.setEmail(doc.getEmail());
-                    newdoc.setAddress(doc.getAddress());
-                    newdoc.setURL(doc.getURL());*/
-                    medicineParseList.add(newmed);
+                    if(med.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        MedicineInfo newmed = new MedicineInfo();
+                        newmed.setParseId(med.getObjectId());
+                        newmed.setName(med.getName());
+                        newmed.setNote(med.getNote());
+                        /*newdoc.setInsurance(doc.getInsurance());
+                        newdoc.setPhoneNum(doc.getPhoneNum());
+                        newdoc.setEmail(doc.getEmail());
+                        newdoc.setAddress(doc.getAddress());
+                        newdoc.setURL(doc.getURL());*/
+                        medicineParseList.add(newmed);
+                    }
                 }
                 /*have to make adapter and set here because if set outside done method and after
                 data will not appear because it sets the data before it is pulled from parse
