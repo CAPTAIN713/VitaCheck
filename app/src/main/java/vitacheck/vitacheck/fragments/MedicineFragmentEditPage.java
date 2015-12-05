@@ -158,9 +158,11 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                 intent.putExtra("dosage", dosageAmountTB.getText().toString());
                 int id = new Random().nextInt(100);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Calendar alarmCalendar = Calendar.getInstance();
+                alarmCalendar.set(Calendar.SECOND, alarmCalendar.get(Calendar.SECOND)+10);
                 AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+10000, pendingIntent);
-                Toast.makeText(context, "Alarm set for 10sec", Toast.LENGTH_LONG).show();
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
+                Toast.makeText(context, "Alarm set for "+alarmCalendar.getTime(), Toast.LENGTH_LONG).show();
                 break;
 
         }
