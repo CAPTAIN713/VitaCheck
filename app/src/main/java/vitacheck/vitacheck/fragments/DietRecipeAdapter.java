@@ -1,6 +1,8 @@
 package vitacheck.vitacheck.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +23,12 @@ public class DietRecipeAdapter extends RecyclerView.Adapter<DietRecipeAdapter.My
     private LayoutInflater inflater;
     /*i used emptyList() so that there is no null expect error if data does not load*/
     private List<DietRecipeInfo> dietRecipeList;//= Collections.emptyList();
+    private final Context recipeContext;
 
     public DietRecipeAdapter(Context context, List<DietRecipeInfo> data){
         /*inflates the recyclerview_doctor_row xml file*/
         inflater=LayoutInflater.from(context);
+        recipeContext=context;
         this.dietRecipeList=data;
     }
 
@@ -73,7 +77,7 @@ public class DietRecipeAdapter extends RecyclerView.Adapter<DietRecipeAdapter.My
             super(itemView);
             dietRecipeName= (TextView) itemView.findViewById(R.id.recipeNameView);
             dietRecipeURL= (TextView) itemView.findViewById(R.id.recipeURLView);
-            //dietRecipeDescription= (TextView) itemView.findViewById(R.id.recipeDescriptionView);
+            //dietRecipeDescription= (TextView) itemView.findViewById(R.id.recipeNoteView);
             dietRecipeName.setOnClickListener(this);
             dietRecipeURL.setOnClickListener(this);
             //dietRecipeDescription.setOnClickListener(this);
@@ -82,7 +86,17 @@ public class DietRecipeAdapter extends RecyclerView.Adapter<DietRecipeAdapter.My
         @Override
         /*video on how to handle recycler clicks found here: https://www.youtube.com/watch?v=zE1E1HOK_E4   */
         public void onClick(View v) {
-            deleteRecipe(getPosition());
+
+            //deleteRecipe(getPosition());
+
+            int clickPosition = this.getAdapterPosition();
+            DietRecipeInfo current = dietRecipeList.get(clickPosition);
+            //Link on how to use bundles: http://www.101apps.co.za/index.php/articles/passing-data-between-activities.html
+            Bundle bundle = new Bundle();
+            bundle.putString("parseID", current.getParseID());
+            Intent myIntent = new Intent(recipeContext, DietRecipeActivity.class); //video on starting new activity in onClick: https://www.youtube.com/watch?v=K9F6U7yN2vI
+            myIntent.putExtras(bundle);
+            recipeContext.startActivity(myIntent); //or just look at Michael's MainActivity.java class
         }
     }
 
