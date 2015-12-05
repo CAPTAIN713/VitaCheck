@@ -143,11 +143,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ALARM"
+            android:text="Set Reminder"
             android:id="@+id/alarm"
             android:layout_gravity="right"
             android:layout_above="@+id/medicineSaveEditChanges"
             android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
 </LinearLayout>

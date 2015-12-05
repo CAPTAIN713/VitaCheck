@@ -39,6 +39,8 @@ import com.parse.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import vitacheck.vitacheck.fragments.ParseApplication;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -325,6 +327,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 //go to main activity
+                ((ParseApplication) getApplication()).setUserId(mEmail);
                 mDialog.dismiss();
                 Intent myIntent = new Intent(LoginActivity.this ,MainActivity.class);
                 startActivity(myIntent);

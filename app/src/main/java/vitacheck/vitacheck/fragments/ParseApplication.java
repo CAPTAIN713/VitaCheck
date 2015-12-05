@@ -17,11 +17,23 @@ public class ParseApplication extends android.app.Application {
     *   parse docs: https://parse.com/docs/android/guide
     *   */
 
+    private String userId;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
+
+        userId = "";
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String id) {
+        this.userId = id;
     }
 
 }
