@@ -69,6 +69,7 @@ public class MedicineFragmentSaveNewMed  extends Fragment implements View.OnClic
                     newMedicine.setDosagePerDay(Integer.valueOf(dosagePerDayTB.getText().toString()));
                 }
                 newMedicine.setPrescribedBy(prescribedByTB.getText().toString());
+                newMedicine.setUserId(GlobalVariable.getUserId(this));
 
                 newMedicine.saveInBackground();
                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
