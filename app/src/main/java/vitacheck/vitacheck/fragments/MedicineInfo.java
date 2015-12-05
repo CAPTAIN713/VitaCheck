@@ -20,6 +20,9 @@ public class MedicineInfo extends ParseObject {
     public String getParseId() { return id;}
     public void setParseId(String ID) { id=ID;}
 
+    public String getUserId() {return getString("user_id");}
+    public void setUserId(String name) {put("user_id",name);}
+
     public String getName() {return getString("medicine_name");}
     public void setName(String name) {put("medicine_name",name);}
 
