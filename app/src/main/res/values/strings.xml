@@ -38,7 +38,7 @@
     <string name="address">Address: </string>
     <string name="website_link">Website: </string>
     <string name="vist_dates">Visit Dates: </string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Home</string>
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Settings</string>

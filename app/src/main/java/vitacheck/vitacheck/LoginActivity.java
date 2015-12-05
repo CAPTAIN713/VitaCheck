@@ -1,9 +1,8 @@
 package vitacheck.vitacheck;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.ProgressDialog;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -60,8 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    public ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,13 +97,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(myIntent);
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-
-        // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
     }
 
     private void populateAutoComplete() {
@@ -215,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**
@@ -228,45 +219,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
 
         hideSoftKeyboard();
 
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mDialog = new ProgressDialog(this);
+        mDialog.setMessage("Logging In...");
+        mDialog.setCancelable(false);
+        mDialog.show();
     }
 
     @Override
@@ -312,8 +272,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
-
-
+    
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
@@ -338,20 +297,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
-
         @Override
         protected Boolean doInBackground(Void... params) {
 
             // Send data to Parse.com for verification
             ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
                 public void done(ParseUser user, ParseException e) {
-                    if (user != null)
-                    {
+                    if (user != null) {
                         flag = true;
                         // user logged into parse
-                    }
-                    else
-                    {
+                    } else {
                         flag = false;
                         // user not logged into parse
                     }
@@ -361,7 +316,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             // Necessary for Parse verification
             SystemClock.sleep(1000);
-
             return flag;
         }
 
@@ -369,19 +323,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
 
-
             if (success) {
                 //go to main activity
-
-                //ParseObject testObject = new ParseObject("TestObject");
-                //testObject.put("foo", "bar");
-                //testObject.saveInBackground();
-
+                mDialog.dismiss();
                 Intent myIntent = new Intent(LoginActivity.this ,MainActivity.class);
                 startActivity(myIntent);
-                finish();
             } else {
-                showProgress(false);
+                mDialog.dismiss();
                 // email or password error
                 Toast.makeText(getApplicationContext(), "Email/Password Incorrect", Toast.LENGTH_LONG).show();
                 //mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -392,7 +340,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-            showProgress(false);
+            mDialog.dismiss();
         }
     }
 }
