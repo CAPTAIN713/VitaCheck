@@ -78,10 +78,16 @@ public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickL
                 newDoctor.saveInBackground();
                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
 
+                if(getFragmentManager().getBackStackEntryCount()>1)
+                {
+                    //if at least one thing on fragment stack go back to that one
+                    getFragmentManager().popBackStack();
+                }
+                /*
                 Fragment fragment = new DoctorsFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
-                transaction.commit();
+                transaction.commit();*/
                 break;
         }
     }
