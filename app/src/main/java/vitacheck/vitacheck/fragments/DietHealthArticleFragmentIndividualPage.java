@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class DietHealthArticleFragmentIndividualPage extends Fragment implements
 
     private String selectedItemParseID;
     private  Bundle extrasBundle;
+    private String dietHealthURL;
 
 
     @Override
@@ -69,6 +71,7 @@ public class DietHealthArticleFragmentIndividualPage extends Fragment implements
         editButton = (Button) layout.findViewById(R.id.editDietHealthButton);
 
         editButton.setOnClickListener(this);
+        dietHealthURLTB.setOnClickListener(this);
 
         ParseObject.registerSubclass(DietHealthArticleInfo.class);
         ParseQuery<DietHealthArticleInfo> query = ParseQuery.getQuery("diet_health_article");
@@ -80,7 +83,7 @@ public class DietHealthArticleFragmentIndividualPage extends Fragment implements
                     dietHealthNameTB.setText(object.getHealthName());
                     dietHealthURLTB.setText(object.getHealthURL());
                     dietHealthNoteTB.setText(object.getHealthDescription());
-
+                    dietHealthURL=String.valueOf(object.getHealthURL());
                 }
                 else{
                     //someting went wrong
@@ -103,7 +106,18 @@ public class DietHealthArticleFragmentIndividualPage extends Fragment implements
                 transaction.replace(R.id.dietHealthActivityContainer, dietHealthEditFragment);
                 transaction.commit();
                 break;
+            case R.id.dietHealthURLIndv:
+                //link to video on going to web browser: https://www.youtube.com/watch?v=9-3OCc5g5oE
+                try {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dietHealthURL));
+                    startActivity(browserIntent);
+                }
+                catch (android.content.ActivityNotFoundException ex){
+                    Toast.makeText(getActivity(),"Unable to open link",Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
+
 
 }//end of DietFoodFragment class
