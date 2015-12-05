@@ -1,7 +1,6 @@
 package vitacheck.vitacheck.fragments;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,17 +60,16 @@ public class DietAddFoodFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_diet_food_add, container, false);
 
 
-        ParseObject food;
+
         saveFoodButton = (Button) view.findViewById(R.id.saveButton);
         saveFoodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Fragment fragment = null;
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 mFoodName = (EditText) getView().findViewById(R.id.editFoodText);
                 mFoodCalories = (EditText) getView().findViewById(R.id.editCaloriesText);
                 mFoodDate = (EditText) getView().findViewById(R.id.editDateText);
-                DietFoodInfo food = new DietFoodInfo();
+                ParseObject food = new ParseObject("diet_food");
                 try{
                     Date date = format.parse(mFoodDate.getText().toString());
                     food.put("Date", date);
@@ -82,18 +80,11 @@ public class DietAddFoodFragment extends Fragment {
                 }
                 food.put("name", mFoodName.getText().toString());
                 food.put("calories", Integer.parseInt(mFoodCalories.getText().toString()));
+
+
                 food.saveInBackground();
-
-
-               //fragment = new DietFoodFragment();
-               // FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                //transaction.replace(R.id.container, fragment);
-               // transaction.commit();
-
             }
         });
-
-
         return view;
 
     }
