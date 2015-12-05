@@ -1,16 +1,13 @@
 package vitacheck.vitacheck.fragments;
 
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -33,7 +30,6 @@ public class DietFoodFragment extends Fragment {
     private RecyclerView recyclerView;
     private DietFoodAdapter adapter;
 
-    private Button addFoodButton;
     private List<DietFoodInfo> dietFoodParseList = new ArrayList<DietFoodInfo>();
 
     @Override
@@ -54,15 +50,13 @@ public class DietFoodFragment extends Fragment {
             public void done(List<DietFoodInfo> objects, com.parse.ParseException e) {
                 if (e != null) {
                     Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();
-
                 }
 
-                for (DietFoodInfo food : objects) {
+                for (DietFoodInfo doc : objects) {
                     DietFoodInfo newDietFood = new DietFoodInfo();
-                    newDietFood.setParseID(food.getObjectId());
-                    newDietFood.setFoodName(food.getFoodName());
-                    newDietFood.setFoodCalories(food.getFoodCalories());
-                    newDietFood.setFoodDate(food.getFoodDate());
+                    newDietFood.setFoodName(doc.getFoodName());
+                    newDietFood.setFoodCalories(doc.getFoodCalories());
+                    newDietFood.setFoodDate(doc.getFoodDate());
                     dietFoodParseList.add(newDietFood);
                 }
                 /*have to make adapter and set here because if set outside done method and after
@@ -74,24 +68,6 @@ public class DietFoodFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         });
-
-            addFoodButton = (Button) layout.findViewById(R.id.addFoodButton);
-            addFoodButton.setOnClickListener(new View.OnClickListener() {
-                Fragment fragment = null;
-                @Override
-                public void onClick(View v) {
-                    fragment = new DietAddFoodFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.container, fragment);
-                    transaction.commit();
-                }
-            });
-
-
-
-
-
-
         return layout;
     }
 }

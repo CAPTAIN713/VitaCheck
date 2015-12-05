@@ -34,7 +34,7 @@ public class DietAddHealthArticleFragment extends Fragment {
                 mHealthName = (EditText) getView().findViewById(R.id.health_name);
                 mHealthURL = (EditText) getView().findViewById(R.id.health_URL);
                 mHealthDescription = (EditText) getView().findViewById(R.id.health_description);
-                DietHealthArticleInfo health = new DietHealthArticleInfo();
+                ParseObject health = new ParseObject("diet_health_article");
                 health.put("name", mHealthName.getText().toString());
                 health.put("URL", mHealthURL.getText().toString());
                 health.put("note", mHealthDescription.getText().toString());
@@ -46,4 +46,8 @@ public class DietAddHealthArticleFragment extends Fragment {
 
     }
 
+    private void saveRecipe()
+    {
+
+    }
 }

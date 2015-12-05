@@ -45,4 +45,17 @@
     <string name="title_activity_medicine">MedicineActivity</string>
     <string name="title_activity_diet">DietActivity</string>
 
+    <!--  Strings related to vitals -->
+    <string name="heart_rate">Heart Rate</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="glucose">Glucose</string>
+    <string name="weight">Weight</string>
+    <string name="cholesterol">Cholesterol</string>
+    <string name="bpm">BPM</string>
+    <string name="systolic">systolic</string>
+    <string name="diastolic">diastolic</string>
+    <string name="mg_dl">mg/dL</string>
+    <string name="lbs">lbs</string>
+    <string name="kg">kg</string>
+
 </resources>
