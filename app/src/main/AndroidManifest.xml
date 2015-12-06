@@ -34,10 +34,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_home"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".fragments.DoctorActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:label="@string/title_activity_home" />
+        <activity android:name=".fragments.DoctorActivity" />
         <activity android:name=".fragments.VitalSignsActivity" />
         <activity
             android:name=".fragments.MedicineActivity"
