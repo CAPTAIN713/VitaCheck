@@ -37,9 +37,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Enable Local Datastore.
-        //Parse.enableLocalDatastore(this);
-        //Parse.initialize(this, "xJQq6UTUqt4IxtnQPmOTWAqtJAVmXHZtbVFhtDdb", "h56YvQcc77YsEmYj0RbfuJuDut8MUA5IXECwVqoP");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);

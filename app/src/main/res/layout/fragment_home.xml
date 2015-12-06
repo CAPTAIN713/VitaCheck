@@ -1,74 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="vitacheck.vitacheck.fragments.DoctorsFragment"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent" tools:context="vitacheck.vitacheck.fragments.DoctorsFragment">
 
 
-    <!-- UNCOMMENT AT OWN RISK
-         EMULATOR WILL SKIP FRAMES
-         RUN SLOW AND CRASH YOUR PC
-         WORKS FINE ON PHONES THOUGH
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical" >
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view_health"
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            card_view:cardCornerRadius="4dp">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:scaleType="centerCrop"
-                card_view:cardCornerRadius="4dp"
-                android:src="@drawable/health" />
-
-            <TextView
-                android:id="@+id/cardtext_health"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="18dp"
-                android:gravity="center_horizontal|bottom"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:text="View Latest Health Articles"/>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/card_view"
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            card_view:cardCornerRadius="4dp">
-
-            <TextView
-                android:id="@+id/cardhealth_avg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="18dp"
-                android:gravity="center_horizontal|bottom"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:text="Vital Averages"/>
-
-        </android.support.v7.widget.CardView>
-    </LinearLayout>
-
-    -->
 
 
 </FrameLayout>
