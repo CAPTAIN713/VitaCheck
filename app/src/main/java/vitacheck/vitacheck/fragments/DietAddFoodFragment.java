@@ -2,100 +2,95 @@ package vitacheck.vitacheck.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
-import android.content.Intent;
-import android.content.Loader;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
-import java.text.ParseException;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import vitacheck.vitacheck.R;
 
-public class DietAddFoodFragment extends Fragment {
+/**
+ * Created by ERIC on 11/30/2015.
+ */
+public class DietAddFoodFragment  extends Fragment implements View.OnClickListener {
+    private Context context;
+    private DoctorInfo selectedDoctor;
+    private String selectedDoctorParseId;
 
-
-    Button saveFoodButton;
-
-    private EditText mFoodName;
-    private EditText mFoodCalories;
-    private EditText mFoodDate;
+    private EditText foodNameTB, foodCaloriesTB;
+    private EditText  foodDateTB;
+    private Button saveFoodButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_diet_food_add, container, false);
+        View layout = inflater.inflate(R.layout.fragment_diet_food_add, container, false);
+        context = layout.getContext();
 
+        foodNameTB = (EditText) layout.findViewById(R.id.editFoodText);
+        foodCaloriesTB = (EditText) layout.findViewById(R.id.editCaloriesText);
+        foodDateTB = (EditText) layout.findViewById(R.id.editDateText);
 
-        ParseObject food;
-        saveFoodButton = (Button) view.findViewById(R.id.saveButton);
-        saveFoodButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Fragment fragment = null;
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                mFoodName = (EditText) getView().findViewById(R.id.editFoodText);
-                mFoodCalories = (EditText) getView().findViewById(R.id.editCaloriesText);
-                mFoodDate = (EditText) getView().findViewById(R.id.editDateText);
+        saveFoodButton = (Button) layout.findViewById(R.id.saveFoodButton);
+        saveFoodButton.setOnClickListener(this);
+
+        return layout;
+    }
+
+    @Override
+        /*link on how to handle mutiple button clicks
+         http://stackoverflow.com/questions/21827046/handle-multiple-button-click-in-view-onclicklistener-in-android*/
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.saveFoodButton:
+                ParseObject.registerSubclass(DietFoodInfo.class);
                 DietFoodInfo food = new DietFoodInfo();
-                try{
-                    Date date = format.parse(mFoodDate.getText().toString());
-                    food.put("Date", date);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                if ((foodNameTB.getText().toString()).compareTo("") == 0) {
+                    Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
+                    break;
                 }
-                catch (ParseException e) {
+                food.setFoodName(foodNameTB.getText().toString());
+                if ((foodCaloriesTB.getText().toString()).compareTo("") != 0) {
+                    food.setFoodCalories(Integer.valueOf(foodCaloriesTB.getText().toString()));
+                }
+
+                try {
+                    Date date = format.parse(foodDateTB.getText().toString());
+                    food.setFoodDate(date);
+                } catch (java.text.ParseException error) {
                     // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    error.printStackTrace();
                 }
-                food.put("name", mFoodName.getText().toString());
-                food.put("calories", Integer.parseInt(mFoodCalories.getText().toString()));
+
+                food.setUserId(GlobalVariable.getUserId(this));
                 food.saveInBackground();
+                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
 
+                if (getFragmentManager().getBackStackEntryCount() > 1) {
+                    //if at least one thing on fragment stack go back to that one
+                    getFragmentManager().popBackStack();
+                }
 
-               //fragment = new DietFoodFragment();
-               // FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                //transaction.replace(R.id.container, fragment);
-               // transaction.commit();
-
-            }
-        });
-
-
-        return view;
-
+                Fragment fragment = new DietFoodFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.commit();
+                break;
+        }
     }
 
 }

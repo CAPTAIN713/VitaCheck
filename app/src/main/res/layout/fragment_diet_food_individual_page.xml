@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="Name:"
             android:id="@+id/dietFoodName"
             android:padding="8dp" />
 
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Calories"
+            android:text="Calories:"
             android:id="@+id/dietFoodCalories"
             android:padding="8dp" />
 
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Date"
+            android:text="Date:"
             android:id="@+id/dietFoodDate"
             android:padding="8dp" />
 

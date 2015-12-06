@@ -3,6 +3,7 @@ package vitacheck.vitacheck.fragments;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -29,7 +30,7 @@ public class DietHealthArticleFragment extends Fragment {
     /*video on recylerView can be found here: https://www.youtube.com/watch?v=Wq2o4EbM74k   */
     private RecyclerView recyclerView;
     private DietHealthArticleAdapter adapter;
-    private Button addHealthButton;
+    private FloatingActionButton addHealthButton;
     private List<DietHealthArticleInfo> dietHealthParseList = new ArrayList<DietHealthArticleInfo>();
 
     @Override
@@ -77,7 +78,7 @@ public class DietHealthArticleFragment extends Fragment {
 
 
 
-        addHealthButton = (Button) layout.findViewById(R.id.addHealthButton);
+        addHealthButton = (FloatingActionButton) layout.findViewById(R.id.addHealthButton);
         addHealthButton.setOnClickListener(new View.OnClickListener() {
             Fragment fragment = null;
 
