@@ -18,6 +18,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import vitacheck.vitacheck.R;
 
@@ -82,7 +84,7 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                     emailTB.setText(object.getEmail());
                     addressTB.setText(object.getAddress());
                     websiteTB.setText(object.getURL());
-                    //visitDateTB.setText(DateFormat.getDateInstance().format(object.getVisitDate()));
+                    visitDateTB.setText(DateFormat.getDateInstance().format(object.getVisitDate()));
                 }
                 else{
                     //someting went wrong
@@ -96,6 +98,7 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
         /*link on how to handle mutiple button clicks
          http://stackoverflow.com/questions/21827046/handle-multiple-button-click-in-view-onclicklistener-in-android*/
     public void onClick(View v) {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         switch (v.getId()){
             case R.id.doctorSaveEditChanges:
                 if((doctorNameTB.getText().toString()).compareTo("")==0){
@@ -116,21 +119,24 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                             object.setEmail(emailTB.getText().toString());
                             object.setAddress(addressTB.getText().toString());
                             object.setURL(websiteTB.getText().toString());
-                            //object.setVisitDate(visitDateTB.getText().toString());
+                            try{
+                                Date date = dateFormat.parse(visitDateTB.getText().toString());
+                                object.setVisitDate(date);
+                            }
+                            catch (java.text.ParseException dateExp){
+                                dateExp.printStackTrace();
+                            }
                             object.saveInBackground();
                             Toast.makeText(context, "Saved Changes", Toast.LENGTH_SHORT).show();
                         }
+                        if(getFragmentManager().getBackStackEntryCount()>1)
+                        {
+                            //if at least one thing on fragment stack go back to that one
+                            getFragmentManager().popBackStack();
+                        }
                     }
                 });
-                /*FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                Fragment doctorFragment = new DoctorFragmentIndividualPage();
-                //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
-                doctorFragment.setArguments(extrasBundle);
-                transaction.replace(R.id.doctorActivityContainer, doctorFragment);
-                transaction.commit();*/
                 break;
-
         }
     }
-
 }//end of DoctorsFragment class
