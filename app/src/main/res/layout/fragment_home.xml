@@ -1,8 +1,161 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="vitacheck.vitacheck.fragments.DoctorsFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="vitacheck.vitacheck.fragments.DoctorsFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
+        <TwoLineListItem
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="oneLine">
+            <TextView
+                android:id="@android:id/text1"
+                android:gravity="left"
+                android:text="Heart Rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginTop="6dip"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <TextView
+                android:id="@+id/heart_rate"
+                android:gravity="right"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:layout_marginTop="6dip"
+                android:layout_marginRight="30dip"
+                android:layout_toRightOf="@android:id/text1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TwoLineListItem>
+
+        <TwoLineListItem
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="oneLine">
+            <TextView
+                android:id="@android:id/text1"
+                android:gravity="left"
+                android:text="Blood Pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginTop="6dip"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <TextView
+                android:id="@+id/blood_pressure"
+                android:gravity="right"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:layout_marginTop="6dip"
+                android:layout_marginRight="30dip"
+                android:layout_toRightOf="@android:id/text1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TwoLineListItem>
+
+        <TwoLineListItem
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="oneLine">
+            <TextView
+                android:id="@android:id/text1"
+                android:gravity="left"
+                android:text="Glucose Level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginTop="6dip"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <TextView
+                android:id="@+id/glucose_level"
+                android:gravity="right"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:layout_marginTop="6dip"
+                android:layout_marginRight="30dip"
+                android:layout_toRightOf="@android:id/text1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TwoLineListItem>
+
+        <TwoLineListItem
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="oneLine">
+            <TextView
+                android:id="@android:id/text1"
+                android:gravity="left"
+                android:text="Cholesterol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginTop="6dip"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <TextView
+                android:id="@+id/cholesterol"
+                android:gravity="right"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:layout_marginTop="6dip"
+                android:layout_marginRight="30dip"
+                android:layout_toRightOf="@android:id/text1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TwoLineListItem>
+
+        <TwoLineListItem
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:paddingTop="2dip"
+            android:paddingBottom="2dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:mode="oneLine">
+            <TextView
+                android:id="@android:id/text1"
+                android:gravity="left"
+                android:text="Weight Lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:layout_marginTop="6dip"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+            <TextView
+                android:id="@+id/weight_loss"
+                android:gravity="right"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dip"
+                android:layout_marginTop="6dip"
+                android:layout_marginRight="30dip"
+                android:layout_toRightOf="@android:id/text1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </TwoLineListItem>
+
+    </LinearLayout>
 
 
 </FrameLayout>

@@ -331,6 +331,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mDialog.dismiss();
                 Intent myIntent = new Intent(LoginActivity.this ,MainActivity.class);
                 startActivity(myIntent);
+                finish();
             } else {
                 mDialog.dismiss();
                 // email or password error
