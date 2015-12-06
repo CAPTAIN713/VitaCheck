@@ -37,6 +37,22 @@ public class DietRecipeActivity extends AppCompatActivity {
         //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
         dietRecipeFragment.setArguments(extrasBundle);
         transaction.replace(R.id.dietRecipeActivityContainer, dietRecipeFragment);
+        transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+    /*pop stuff of the fragment stack
+    http://stackoverflow.com/questions/28153397/adding-fragment-to-the-addtobackstack-when-you-have-a-single-activity-with-2-fra
+    http://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-android-fragments
+    docs: http://developer.android.com/reference/android/app/FragmentManager.html  */
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
+            //if at least one thing on fragment stack go back to that one
+            getFragmentManager().popBackStack();
+        } else {
+            //if nothing else on stack exit app
+            super.onBackPressed();
+        }
     }
 }

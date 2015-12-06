@@ -20,6 +20,9 @@ public class DietFoodInfo extends ParseObject {
     public String getParseID() {return id;}
     public void setParseID(String ID) {id=ID;}
 
+    public String getUserId() {return getString("user_id");}
+    public void setUserId(String name) {put("user_id",name);}
+
     public String getFoodName() {return getString("name");}
     public void setFoodName(String name) {put("name",name);}
 

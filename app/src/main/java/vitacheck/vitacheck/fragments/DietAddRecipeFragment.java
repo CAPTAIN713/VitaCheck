@@ -1,50 +1,88 @@
 package vitacheck.vitacheck.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import com.parse.ParseObject;
+import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import vitacheck.vitacheck.R;
 
-public class DietAddRecipeFragment extends Fragment {
+/**
+ * Created by ERIC on 11/30/2015.
+ */
+public class DietAddRecipeFragment  extends Fragment implements View.OnClickListener {
+    private Context context;
+    private DietRecipeInfo selectedRecipe;
+    private String selectedRecipeParseId;
 
-
-    Button saveRecipesButton;
-    private EditText mRecipeName;
-    private EditText mRecipeURL;
-    private EditText mRecipeDescription;
-
+    private EditText recipeNameTB, recipeURLTB;
+    private EditText recipeNoteTB;
+    private Button saveRecipeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_diet_recipe_add, container, false);
+        View layout = inflater.inflate(R.layout.fragment_diet_recipe_add, container, false);
+        context = layout.getContext();
 
-        saveRecipesButton = (Button) view.findViewById(R.id.saveRecipeButton);
-        saveRecipesButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            mRecipeName = (EditText) getView().findViewById(R.id.recipe_name);
-            mRecipeURL = (EditText) getView().findViewById(R.id.recipe_URL);
-            mRecipeDescription = (EditText) getView().findViewById(R.id.recipe_description);
-            DietRecipeInfo recipe = new DietRecipeInfo();
-            recipe.put("name", mRecipeName.getText().toString());
-            recipe.put("URL", mRecipeURL.getText().toString());
-            recipe.put("note", mRecipeDescription.getText().toString());
+        recipeNameTB = (EditText) layout.findViewById(R.id.editRecipeText);
+        recipeURLTB = (EditText) layout.findViewById(R.id.editURLText);
+        recipeNoteTB = (EditText) layout.findViewById(R.id.editDescriptionText);
 
-            recipe.saveInBackground();
-        }
+        saveRecipeButton = (Button) layout.findViewById(R.id.saveRecipeButton);
+        saveRecipeButton.setOnClickListener(this);
 
-    });
-
-        return view;
+        return layout;
     }
 
+    @Override
+        /*link on how to handle mutiple button clicks
+         http://stackoverflow.com/questions/21827046/handle-multiple-button-click-in-view-onclicklistener-in-android*/
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.saveRecipeButton:
+                ParseObject.registerSubclass(DietRecipeInfo.class);
+                DietRecipeInfo recipe = new DietRecipeInfo();
+
+                if ((recipeNameTB.getText().toString()).compareTo("") == 0) {
+                    Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                recipe.setRecipeName(recipeNameTB.getText().toString());
+
+                recipe.setRecipeURL(recipeURLTB.getText().toString());
+                recipe.setRecipeDescription(recipeNoteTB.getText().toString());
+
+                recipe.setUserId(GlobalVariable.getUserId(this));
+                recipe.saveInBackground();
+                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+
+                if (getFragmentManager().getBackStackEntryCount() > 1) {
+                    //if at least one thing on fragment stack go back to that one
+                    getFragmentManager().popBackStack();
+                }
+
+                Fragment fragment = new DietRecipeFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.commit();
+                break;
+        }
+
+    }
 }

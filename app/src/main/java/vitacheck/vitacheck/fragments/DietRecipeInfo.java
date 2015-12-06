@@ -23,6 +23,9 @@ public class DietRecipeInfo extends ParseObject {
     public String getParseID() {return id;}
     public void setParseID(String ID) {id=ID;}
 
+    public String getUserId() {return getString("user_id");}
+    public void setUserId(String name) {put("user_id",name);}
+
     public String getRecipeName() {return getString("name");}
     public void setRecipeName(String name) {put("name",name);}
 
