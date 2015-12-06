@@ -35,10 +35,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_home"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".fragments.DoctorActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".fragments.VitalSignsActivity" />
         <activity
             android:name=".fragments.MedicineActivity"
@@ -47,12 +47,12 @@
         <activity
             android:name=".fragments.DietFoodActivity"
             android:label="DietFoodActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".fragments.DietRecipeActivity"
             android:label="DietRecipeActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".fragments.DietHealthArticleActivity"
             android:label="DietHealthArticleActivity"
