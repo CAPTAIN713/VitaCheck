@@ -43,4 +43,7 @@ public class DoctorInfo extends ParseObject {
 
     public Date getVisitDate() {return getDate("visit_dates");}
     public void setVisitDate(Date date) {put("visit_dates",date);}
+
+    public String getUserId() {return getString("user_id");}
+    public void setUserId(String user_id) {put("user_id",user_id);}
 }

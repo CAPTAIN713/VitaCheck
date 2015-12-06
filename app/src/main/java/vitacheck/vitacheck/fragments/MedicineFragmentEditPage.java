@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.parse.GetCallback;
@@ -59,10 +61,12 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
     private String selectedMedicineParseId;
 
     private EditText medicineNameTB,medicineNoteTB,dosageAmountTB,dosagePerDayTB,prescribedByTB;
-    private Button saveButton, alarmButton;
+    private Button saveButton;
+    private CheckBox reminderCheckBox;
+    private AlarmTimePicker medicineTimePicker;
 
     private String selectedItemParseID;
-    private  Bundle extrasBundle;
+    private Bundle extrasBundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,12 +93,13 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
         dosagePerDayTB=(EditText) layout.findViewById(R.id.dosagePerDayEditField);
         prescribedByTB=(EditText) layout.findViewById(R.id.prescribedByEditField);
 
-
         saveButton = (Button) layout.findViewById(R.id.medicineSaveEditChanges);
-        alarmButton = (Button) layout.findViewById(R.id.alarm);
+        reminderCheckBox = (CheckBox) layout.findViewById(R.id.reminderCheckBox);
+        reminderCheckBox.setOnClickListener(this);
+
+        medicineTimePicker = (AlarmTimePicker) layout.findViewById(R.id.medicineTimePicker);
 
         saveButton.setOnClickListener(this);
-        alarmButton.setOnClickListener(this);
 
         ParseObject.registerSubclass(MedicineInfo.class);
         ParseQuery<MedicineInfo> query = ParseQuery.getQuery("medicine");
@@ -144,6 +149,29 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                         }
                     }
                 });
+
+                if(reminderCheckBox.isChecked()) {
+                    Context baseContext = getActivity().getApplicationContext();
+                    Intent intent = new Intent(context, MedicineActivityAlarmPopup.class);
+                    intent.putExtra("name", medicineNameTB.getText().toString());
+                    intent.putExtra("dosage", dosageAmountTB.getText().toString());
+                    int id = new Random().nextInt(100);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    Calendar alarmCalendar = Calendar.getInstance();
+                    int timePickerMinute = medicineTimePicker.getCurrentMinute();
+                    int timePickerHour = medicineTimePicker.getCurrentHour();
+                    //If picked time has already passed, "roll" date forward.
+                    if (timePickerHour < alarmCalendar.get(Calendar.HOUR))
+                        alarmCalendar.roll(Calendar.DATE, true);
+                    else if (timePickerHour == alarmCalendar.get(Calendar.HOUR) && timePickerMinute <= alarmCalendar.get(Calendar.MINUTE))
+                        alarmCalendar.roll(Calendar.DATE, true);
+                    alarmCalendar.set(Calendar.HOUR, timePickerHour);
+                    alarmCalendar.set(Calendar.MINUTE, timePickerMinute);
+                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
+                    Toast.makeText(context, "Alarm set for " + alarmCalendar.getTime(), Toast.LENGTH_LONG).show();
+                }
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 Fragment medicineFragment = new MedicineFragmentIndividualPage();
                 //video on passing bundles to fragments https://samplewww.youtube.com/watch?v=Je9A8lxGDLY
@@ -151,20 +179,6 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                 transaction.replace(R.id.medicineActivityContainer, medicineFragment);
                 transaction.commit();
                 break;
-            case R.id.alarm:
-                Context baseContext = getActivity().getApplicationContext();
-                Intent intent = new Intent(context, MedicineActivityAlarmPopup.class);
-                intent.putExtra("name", medicineNameTB.getText().toString());
-                intent.putExtra("dosage", dosageAmountTB.getText().toString());
-                int id = new Random().nextInt(100);
-                PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                Calendar alarmCalendar = Calendar.getInstance();
-                alarmCalendar.set(Calendar.SECOND, alarmCalendar.get(Calendar.SECOND)+10);
-                AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
-                Toast.makeText(context, "Alarm set for "+alarmCalendar.getTime(), Toast.LENGTH_LONG).show();
-                break;
-
         }
     }
 }//end of DoctorsFragment class
