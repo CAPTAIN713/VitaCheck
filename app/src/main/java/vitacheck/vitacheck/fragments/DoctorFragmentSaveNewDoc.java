@@ -16,6 +16,9 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import vitacheck.vitacheck.R;
 
 /**
@@ -23,8 +26,6 @@ import vitacheck.vitacheck.R;
  */
 public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickListener {
     private Context context;
-    private DoctorInfo selectedDoctor;
-    private String selectedDoctorParseId;
 
     private EditText doctorNameTB,doctorTypeTB,insuranceTB,phoneNumberTB,emailTB;
     private EditText addressTB,websiteTB,visitDateTB;
@@ -56,6 +57,7 @@ public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickL
         /*link on how to handle mutiple button clicks
          http://stackoverflow.com/questions/21827046/handle-multiple-button-click-in-view-onclicklistener-in-android*/
     public void onClick(View v) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         switch (v.getId()){
             case R.id.doctorSaveNewDoctorButton:
                 ParseObject.registerSubclass(DoctorInfo.class);
@@ -73,7 +75,13 @@ public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickL
                 newDoctor.setEmail(emailTB.getText().toString());
                 newDoctor.setAddress(addressTB.getText().toString());
                 newDoctor.setURL(websiteTB.getText().toString());
-                //newDoctor.put(visitDateTB.getText().toString());
+                try{
+                    Date date = dateFormat.parse(visitDateTB.getText().toString());
+                    newDoctor.setVisitDate(date);
+                }
+                catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
 
                 newDoctor.saveInBackground();
                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
@@ -83,11 +91,7 @@ public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickL
                     //if at least one thing on fragment stack go back to that one
                     getFragmentManager().popBackStack();
                 }
-                /*
-                Fragment fragment = new DoctorsFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, fragment);
-                transaction.commit();*/
+
                 break;
         }
     }
