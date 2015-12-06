@@ -2,6 +2,7 @@ package vitacheck.vitacheck;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -71,7 +72,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragment = new MedicineFragment();
                 break;
             case 3:
-                fragment = new VitalsFragment();
+                Intent myIntent = new Intent(this ,VitalSignsActivity.class); //video on starting new activity in onClick: https://www.youtube.com/watch?v=K9F6U7yN2vI
+                this.startActivity(myIntent); //or just look at Michael's MainActivity.java class
+                //fragment = new VitalsFragment();
                 break;
             case 4:
                 fragment = new DietFragment();
