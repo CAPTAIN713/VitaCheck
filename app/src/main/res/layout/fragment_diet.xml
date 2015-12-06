@@ -3,29 +3,27 @@
     android:layout_height="match_parent" tools:context="vitacheck.vitacheck.fragments.DoctorsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="Diet" />
 
     <Button
-        android:layout_width="347dp"
+        android:layout_width="348dp"
         android:layout_height="188dp"
-        android:text="food"
-        android:id="@+id/foodButton"
-        android:layout_gravity="center_horizontal|top" />
-
-    <Button
-        android:layout_width="353dp"
-        android:layout_height="198dp"
         android:text="recipes"
         android:id="@+id/recipeButton"
         android:layout_gravity="center" />
 
     <Button
         android:layout_width="348dp"
-        android:layout_height="184dp"
+        android:layout_height="188dp"
         android:text="health articles"
         android:id="@+id/healthButton"
         android:layout_gravity="center_horizontal|bottom" />
+
+    <Button
+        android:layout_width="348dp"
+        android:layout_height="188dp"
+        android:text="food"
+        android:id="@+id/foodButton"
+        android:layout_gravity="center_horizontal|top" />
 
 
 </FrameLayout>

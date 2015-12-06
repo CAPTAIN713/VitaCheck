@@ -104,6 +104,7 @@ public class DietHealthArticleFragmentIndividualPage extends Fragment implements
                 //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
                 dietHealthEditFragment.setArguments(extrasBundle);
                 transaction.replace(R.id.dietHealthActivityContainer, dietHealthEditFragment);
+                //transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.dietHealthURLIndv:

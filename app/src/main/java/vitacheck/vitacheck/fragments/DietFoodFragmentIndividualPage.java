@@ -102,6 +102,7 @@ public class DietFoodFragmentIndividualPage extends Fragment implements View.OnC
                 //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
                 dietFoodEditFragment.setArguments(extrasBundle);
                 transaction.replace(R.id.dietFoodActivityContainer, dietFoodEditFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
         }
