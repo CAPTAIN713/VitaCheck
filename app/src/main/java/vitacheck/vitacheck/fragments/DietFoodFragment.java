@@ -4,6 +4,7 @@ package vitacheck.vitacheck.fragments;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,7 +34,7 @@ public class DietFoodFragment extends Fragment {
     private RecyclerView recyclerView;
     private DietFoodAdapter adapter;
 
-    private Button addFoodButton;
+    private FloatingActionButton addFoodButton;
     private List<DietFoodInfo> dietFoodParseList = new ArrayList<DietFoodInfo>();
 
     @Override
@@ -57,7 +58,10 @@ public class DietFoodFragment extends Fragment {
 
                 }
 
-                for (DietFoodInfo food : objects) {
+                for (DietFoodInfo food : objects)
+                    if(food.getUserId().equals(GlobalVariable.getUserId(getActivity())))
+                {
+
                     DietFoodInfo newDietFood = new DietFoodInfo();
                     newDietFood.setParseID(food.getObjectId());
                     newDietFood.setFoodName(food.getFoodName());
@@ -75,7 +79,7 @@ public class DietFoodFragment extends Fragment {
             }
         });
 
-            addFoodButton = (Button) layout.findViewById(R.id.addFoodButton);
+            addFoodButton = (FloatingActionButton) layout.findViewById(R.id.addFoodButton);
             addFoodButton.setOnClickListener(new View.OnClickListener() {
                 Fragment fragment = null;
                 @Override

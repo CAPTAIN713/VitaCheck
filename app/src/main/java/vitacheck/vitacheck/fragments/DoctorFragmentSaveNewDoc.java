@@ -66,6 +66,7 @@ public class DoctorFragmentSaveNewDoc  extends Fragment implements View.OnClickL
                     Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                newDoctor.setUserId(GlobalVariable.getUserId(this));
                 newDoctor.setName(doctorNameTB.getText().toString());
                 newDoctor.setDoctorType(doctorTypeTB.getText().toString());
                 newDoctor.setInsurance(insuranceTB.getText().toString());

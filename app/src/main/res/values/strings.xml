@@ -48,5 +48,6 @@
     <string name="mg_dl">mg/dl</string>
     <string name="bpm">BPM</string>
     <string name="lbs">lbs</string>
+    <string name="dividerSlash">/</string>
 
 </resources>

@@ -106,6 +106,7 @@ public class DietRecipeFragmentIndividualPage extends Fragment implements View.O
                 //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
                 dietRecipeEditFragment.setArguments(extrasBundle);
                 transaction.replace(R.id.dietRecipeActivityContainer, dietRecipeEditFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
             case R.id.dietRecipeURLIndv:
