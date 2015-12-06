@@ -1,5 +1,6 @@
 package vitacheck.vitacheck.fragments;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -27,7 +29,7 @@ public class DietRecipeFragment extends Fragment {
     /*video on recylerView can be found here: https://www.youtube.com/watch?v=Wq2o4EbM74k   */
     private RecyclerView recyclerView;
     private DietRecipeAdapter adapter;
-
+    private Button addRecipeButton;
     private List<DietRecipeInfo> dietRecipeParseList = new ArrayList<DietRecipeInfo>();
 
     @Override
@@ -51,10 +53,11 @@ public class DietRecipeFragment extends Fragment {
                     Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();
                 }
 
-                for (DietRecipeInfo doc : objects) {
+                for (DietRecipeInfo rec : objects) {
                     DietRecipeInfo newrec = new DietRecipeInfo();
-                    newrec.setRecipeName(doc.getRecipeName());
-                    newrec.setRecipeURL(doc.getRecipeURL());
+                    newrec.setParseID(rec.getObjectId());
+                    newrec.setRecipeName(rec.getRecipeName());
+                    newrec.setRecipeURL(rec.getRecipeURL());
                     dietRecipeParseList.add(newrec);
                 }
                 /*have to make adapter and set here because if set outside done method and after
@@ -64,6 +67,20 @@ public class DietRecipeFragment extends Fragment {
                 adapter = new DietRecipeAdapter(getActivity(), dietRecipeParseList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            }
+        });
+
+
+        addRecipeButton = (Button) layout.findViewById(R.id.addRecipeButton);
+        addRecipeButton.setOnClickListener(new View.OnClickListener() {
+            Fragment fragment = null;
+
+            @Override
+            public void onClick(View v) {
+                fragment = new DietAddRecipeFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.commit();
             }
         });
         return layout;

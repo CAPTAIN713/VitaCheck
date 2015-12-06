@@ -138,6 +138,7 @@ public class DoctorFragmentIndividualPage extends Fragment implements View.OnCli
                 //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
                 doctorEditFragment.setArguments(extrasBundle);
                 transaction.replace(R.id.doctorActivityContainer, doctorEditFragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 break;
 

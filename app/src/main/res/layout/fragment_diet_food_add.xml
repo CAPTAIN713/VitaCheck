@@ -25,7 +25,8 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editDateText"
-        android:text="Date" />
+        android:text="Date YYYY-MM-DD" />
+
 
     <Button
         android:layout_width="wrap_content"
