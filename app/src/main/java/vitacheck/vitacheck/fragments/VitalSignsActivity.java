@@ -29,7 +29,7 @@ import java.util.List;
 
 import vitacheck.vitacheck.R;
 
-public class VitalSignsActivity extends AppCompatActivity implements View.OnClickListener {
+public class VitalSignsActivity extends AppCompatActivity implements View.OnClickListener{
 
     /*
     @Override
@@ -82,9 +82,7 @@ public class VitalSignsActivity extends AppCompatActivity implements View.OnClic
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
         itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.icon_button_action_red_touch));
 
-        SubActionButton weightSubButton = itemBuilder.setContentView(weightIcon).build();
-        weightSubButton.setTag("weight");
-        weightSubButton.setOnClickListener(this);
+
         SubActionButton bloodPressureSubButton = itemBuilder.setContentView(bloodPressureIcon).build();
         bloodPressureSubButton.setTag("bloodPressure");
         bloodPressureSubButton.setOnClickListener(this);
@@ -94,20 +92,23 @@ public class VitalSignsActivity extends AppCompatActivity implements View.OnClic
         SubActionButton heartRateSubButton = itemBuilder.setContentView(heartRateIcon).build();
         heartRateSubButton.setTag("heartRate");
         heartRateSubButton.setOnClickListener(this);
+        SubActionButton weightSubButton = itemBuilder.setContentView(weightIcon).build();
+        weightSubButton.setTag("weight");
+        weightSubButton.setOnClickListener(this);
         SubActionButton cholesterolSubButton = itemBuilder.setContentView(cholesterolIcon).build();
         cholesterolSubButton.setTag("cholesterol");
         cholesterolSubButton.setOnClickListener(this);
 
         FloatingActionMenu addActionMenuButtons = new FloatingActionMenu.Builder(this)
                 .setRadius(getResources().getDimensionPixelSize(R.dimen.action_menu_radius))
-                .addSubActionView(weightSubButton)
+
+                .addSubActionView(heartRateSubButton)
                 .addSubActionView(bloodPressureSubButton)
                 .addSubActionView(glucoseSubButton)
-                .addSubActionView(heartRateSubButton)
+                .addSubActionView(weightSubButton)
                 .addSubActionView(cholesterolSubButton)
                 .attachTo(addActionButton)
                 .build();
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -120,19 +121,9 @@ public class VitalSignsActivity extends AppCompatActivity implements View.OnClic
         viewPager.setAdapter(adapter);
     }
 
-
-    public void getItemPosition(Object object){
-        if (object instanceof VitalSignsWeightFragment){
-            ((VitalSignsWeightFragment) object).update();
-        }
-        //return super.getItemPosition(object);
-    }
-
-    /*public void up(){
-        viewPager.getAdapter().notifyDataSetChanged();
-    }*/
     @Override
     public void onClick(View v) {
+        /* this is how i did updating: https://www.youtube.com/watch?v=2lcBx4KVUVk */
         if(v.getTag().equals("weight")){
             addWeight(GlobalVariable.getUserId(this));
             Log.i("Tag","weight");
@@ -297,7 +288,7 @@ public class VitalSignsActivity extends AppCompatActivity implements View.OnClic
 
     public void addBloodPressure(final String uid){
             /* link on popup dialogs: http://www.tutorialspoint.com/android/android_alert_dialoges.htm */
-
+        /*link on multiple text views: http://stackoverflow.com/questions/7334292/set-multiple-text-boxes-in-a-dialog-in-android  */
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         LinearLayout lilal= new LinearLayout(this);
         lilal.setOrientation(LinearLayout.HORIZONTAL);
