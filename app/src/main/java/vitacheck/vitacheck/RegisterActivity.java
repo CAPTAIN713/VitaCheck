@@ -106,15 +106,11 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("height_feet", heightft);
         user.put("height_inches", heightin);
 
-        // Check which radio button was clicked
-        switch(mgender.getId()) {
-            case R.id.maleRadioButton:
-                user.put("gender", "Male");
-                break;
-            case R.id.femaleRadioButton:
-                user.put("gender", "Female");
-                break;
-        }
+        int val = mgender.indexOfChild(findViewById(mgender.getCheckedRadioButtonId()));
+        if (val==0)
+            user.put("gender", "Male");
+        else if(val==1)
+            user.put("gender", "Female");
 
         user.signUpInBackground();
 
