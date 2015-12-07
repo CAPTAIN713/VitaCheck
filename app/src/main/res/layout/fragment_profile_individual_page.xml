@@ -5,66 +5,95 @@
     android:touchscreenBlocksFocus="false"
     android:weightSum="1">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Name:"
-            android:id="@+id/dietFoodName"
+            android:id="@+id/profileName"
             android:padding="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dietFoodNameIndv" />
+            android:id="@+id/profileNameIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileName" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Calories:"
-            android:id="@+id/dietFoodCalories"
+            android:text="Email:"
+            android:id="@+id/profileEmail"
             android:padding="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dietFoodCaloriesIndv" />
-    </LinearLayout>
+            android:id="@+id/profileEmailIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileEmail"/>
+    </RelativeLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Date:"
-            android:id="@+id/dietFoodDate"
+            android:text="Date of Birth:"
+            android:id="@+id/profileDateOfBirth"
             android:padding="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/dietFoodDateIndv" />
-    </LinearLayout>
+            android:id="@+id/profileDateOfBirthIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileDateOfBirth"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Weight:"
+            android:id="@+id/profileWeight"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/profileWeightIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileWeight"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -77,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit"
-            android:id="@+id/editDietFoodButton"
+            android:id="@+id/editProfileButton"
             android:layout_gravity="right"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"

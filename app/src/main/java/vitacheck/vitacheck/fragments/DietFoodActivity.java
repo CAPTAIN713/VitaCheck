@@ -23,11 +23,10 @@ public class DietFoodActivity extends AppCompatActivity {
         extrasBundle = intentExtras.getExtras();
 
 
-        if( !(extrasBundle.isEmpty()) && (extrasBundle.containsKey("parseID")) ){
+        if (!(extrasBundle.isEmpty()) && (extrasBundle.containsKey("parseID"))) {
             //checks if bundle is empty and if it has the parse id string
-            selectedItemParseID=extrasBundle.getString("parseID");
-        }
-        else{
+            selectedItemParseID = extrasBundle.getString("parseID");
+        } else {
             //either bundle was empty or did not have parse id. should find a way to go back to previous activity
             //put finish()
         }
@@ -37,7 +36,24 @@ public class DietFoodActivity extends AppCompatActivity {
         Fragment dietFoodFragment = new DietFoodFragmentIndividualPage();
         //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
         dietFoodFragment.setArguments(extrasBundle);
-        transaction.replace(R.id.dietFoodActivityContainer,dietFoodFragment);
+        transaction.replace(R.id.dietFoodActivityContainer, dietFoodFragment);
+        transaction.addToBackStack(null);
         transaction.commit();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+    /*pop stuff of the fragment stack
+    http://stackoverflow.com/questions/28153397/adding-fragment-to-the-addtobackstack-when-you-have-a-single-activity-with-2-fra
+    http://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-android-fragments
+    docs: http://developer.android.com/reference/android/app/FragmentManager.html  */
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
+            //if at least one thing on fragment stack go back to that one
+            getFragmentManager().popBackStack();
+        } else {
+            //if nothing else on stack exit app
+            super.onBackPressed();
+        }
     }
 }

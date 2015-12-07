@@ -75,7 +75,6 @@ public class DietFoodFragmentEditPage extends Fragment implements View.OnClickLi
                     //something went right
                     dietFoodNameTB.setText(object.getFoodName());
                     dietFoodCaloriesTB.setText(String.valueOf(object.getFoodCalories()));
-
                     dietFoodDateTB.setText(DateFormat.getDateInstance().format(object.getFoodDate()));
                 }
                 else{
@@ -109,16 +108,20 @@ public class DietFoodFragmentEditPage extends Fragment implements View.OnClickLi
                             //something went right
                             object.setFoodName((dietFoodNameTB.getText().toString()));
                             object.setFoodCalories(Integer.parseInt(dietFoodCaloriesTB.getText().toString()));
-                            try{
-                               Date date = format.parse(dietFoodDateTB.getText().toString());
-                             object.setFoodDate(date);
-                            }
-                            catch (java.text.ParseException error) {
+                            try {
+                                Date date = format.parse(dietFoodDateTB.getText().toString());
+                                object.setFoodDate(date);
+                            } catch (java.text.ParseException error) {
                                 // TODO Auto-generated catch block
                                 error.printStackTrace();
                             }
                             object.saveInBackground();
                             Toast.makeText(context, "Saved Changes", Toast.LENGTH_SHORT).show();
+                            if (getFragmentManager().getBackStackEntryCount() > 1) {
+                                //if at least one thing on fragment stack go back to that one
+                                getFragmentManager().popBackStack();
+
+                            }
                         }
                     }
                 });

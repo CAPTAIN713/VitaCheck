@@ -1,49 +1,88 @@
 package vitacheck.vitacheck.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import com.parse.ParseObject;
+import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import vitacheck.vitacheck.R;
 
-public class DietAddHealthArticleFragment extends Fragment {
+/**
+ * Created by ERIC on 11/30/2015.
+ */
+public class DietAddHealthArticleFragment  extends Fragment implements View.OnClickListener {
+    private Context context;
+    private DietHealthArticleInfo selectedHealthArticle;
+    private String selectedHealthArticleParseId;
 
-
-    Button saveHealthArticleButton;
-    private EditText mHealthName;
-    private EditText mHealthURL;
-    private EditText mHealthDescription;
+    private EditText healthNameTB, healthURLTB;
+    private EditText healthNoteTB;
+    private Button saveHealthArticleButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_diet_health_add, container, false);
+        View layout = inflater.inflate(R.layout.fragment_diet_health_add, container, false);
+        context = layout.getContext();
 
+        healthNameTB = (EditText) layout.findViewById(R.id.editHealthText);
+        healthURLTB = (EditText) layout.findViewById(R.id.editURLText);
+        healthNoteTB = (EditText) layout.findViewById(R.id.editDescriptionText);
 
-        saveHealthArticleButton = (Button) view.findViewById(R.id.saveHealthButton);
-        saveHealthArticleButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mHealthName = (EditText) getView().findViewById(R.id.health_name);
-                mHealthURL = (EditText) getView().findViewById(R.id.health_URL);
-                mHealthDescription = (EditText) getView().findViewById(R.id.health_description);
-                DietHealthArticleInfo health = new DietHealthArticleInfo();
-                health.put("name", mHealthName.getText().toString());
-                health.put("URL", mHealthURL.getText().toString());
-                health.put("note", mHealthDescription.getText().toString());
+        saveHealthArticleButton = (Button) layout.findViewById(R.id.saveHealthButton);
+        saveHealthArticleButton.setOnClickListener(this);
 
-                health.saveInBackground();
-            }
-        });
-        return view;
-
+        return layout;
     }
 
+    @Override
+        /*link on how to handle mutiple button clicks
+         http://stackoverflow.com/questions/21827046/handle-multiple-button-click-in-view-onclicklistener-in-android*/
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.saveHealthButton:
+                ParseObject.registerSubclass(DietHealthArticleInfo.class);
+                DietHealthArticleInfo health = new DietHealthArticleInfo();
+
+                if ((healthNameTB.getText().toString()).compareTo("") == 0) {
+                    Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                health.setHealthName(healthNameTB.getText().toString());
+
+                health.setHealthURL(healthURLTB.getText().toString());
+                health.setHealthDescription(healthNoteTB.getText().toString());
+
+                health.setUserId(GlobalVariable.getUserId(this));
+                health.saveInBackground();
+                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+
+                if (getFragmentManager().getBackStackEntryCount() > 1) {
+                    //if at least one thing on fragment stack go back to that one
+                    getFragmentManager().popBackStack();
+                }
+
+                Fragment fragment = new DietHealthArticleFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, fragment);
+                transaction.commit();
+                break;
+        }
+
+    }
 }
