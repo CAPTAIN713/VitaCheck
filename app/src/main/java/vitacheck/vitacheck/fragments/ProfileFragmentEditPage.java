@@ -103,7 +103,6 @@ public class ProfileFragmentEditPage extends Fragment implements View.OnClickLis
         profileHeightFeetTB.setText(String.valueOf(currentUser.get("height_feet")));
         profileHeightInchesTB.setText(String.valueOf(currentUser.get("height_inches")));
 
-
         Date dateOfBirth = (Date) currentUser.get("date");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         profileDateOfBirthTB.setText(dateFormat.format(dateOfBirth));
