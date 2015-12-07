@@ -96,6 +96,75 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Height:"
+            android:id="@+id/profileHeight"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/profileHeightFeetIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileHeight"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="ft"
+            android:id="@+id/profileFeet"
+            android:padding="8dp"
+            android:layout_toEndOf="@+id/profileHeightFeetIndv"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/profileHeightInchesIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileFeet"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="inches"
+            android:id="@+id/profileInches"
+            android:padding="8dp"
+            android:layout_toEndOf="@+id/profileHeightInchesIndv"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Gender:"
+            android:id="@+id/profileGender"
+            android:padding="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/profileGenderIndv"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/profileGender"/>
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1.09"

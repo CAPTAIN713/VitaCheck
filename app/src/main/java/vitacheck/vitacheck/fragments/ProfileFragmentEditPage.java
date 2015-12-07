@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -64,7 +66,10 @@ public class ProfileFragmentEditPage extends Fragment implements View.OnClickLis
     private ParseUser currentUser;
 
     private EditText profileNameTB, profileEmailTB, profilePasswordTB, profileDateOfBirthTB, profileWeightTB;
+    private EditText profileHeightFeetTB,profileHeightInchesTB;
     private Button saveButton;
+    RadioGroup genderRadioGroup;
+    private String gender = "Male";
 
     boolean slash = false;
     boolean dash = false;
@@ -85,18 +90,39 @@ public class ProfileFragmentEditPage extends Fragment implements View.OnClickLis
         profilePasswordTB = (EditText) layout.findViewById(R.id.profilePasswordEditField);
         profileDateOfBirthTB = (EditText) layout.findViewById(R.id.profileDateOfBirthEditField);
         profileWeightTB = (EditText) layout.findViewById(R.id.profileWeightEditField);
+        profileHeightFeetTB = (EditText) layout.findViewById(R.id.profileHeightFeetEditField);
+        profileHeightInchesTB = (EditText) layout.findViewById(R.id.profileHeightInchesEditField);
 
         saveButton = (Button) layout.findViewById(R.id.profileSaveEditChanges);
         saveButton.setOnClickListener(this);
 
         profileNameTB.setText(String.valueOf(currentUser.get("name")));
         profileEmailTB.setText(String.valueOf(currentUser.get("email")));
+
         profileWeightTB.setText(String.valueOf(currentUser.get("weight")));
+        profileHeightFeetTB.setText(String.valueOf(currentUser.get("height_feet")));
+        profileHeightInchesTB.setText(String.valueOf(currentUser.get("height_inches")));
+
 
         Date dateOfBirth = (Date) currentUser.get("date");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         profileDateOfBirthTB.setText(dateFormat.format(dateOfBirth));
-        return layout;
+
+        genderRadioGroup = (RadioGroup) layout.findViewById(R.id.genderRadioGroup);
+        if(String.valueOf(currentUser.get("gender")).equals("Female"))
+            genderRadioGroup.check(R.id.femaleRadioButton);
+        genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if(null!=rb && checkedId > -1){
+                    gender = rb.getText().toString();
+                }
+
+            }
+        });
+
+    return layout;
     }
 
     @Override
@@ -125,7 +151,25 @@ public class ProfileFragmentEditPage extends Fragment implements View.OnClickLis
                         currentUser.put("date", date);
                     }
                     catch (Exception e) {}
-                currentUser.put("weight", Double.parseDouble(profileWeightTB.getText().toString()));
+                try {
+                    currentUser.put("weight", Double.parseDouble(profileWeightTB.getText().toString()));
+                }
+                catch(Exception e){
+                    currentUser.put("weight", 0);
+                }
+                currentUser.put("gender", gender);
+                try {
+                    currentUser.put("height_feet", Integer.parseInt(profileHeightFeetTB.getText().toString()));
+                }
+                catch(Exception e){
+                    currentUser.put("height_feet", 0);
+                }
+                try {
+                    currentUser.put("height_inches", Integer.parseInt(profileHeightInchesTB.getText().toString()));
+                }
+                catch(Exception e){
+                    currentUser.put("height_inches", 0);
+                }
                 currentUser.saveInBackground();
                 Toast.makeText(context, "Saved Changes", Toast.LENGTH_SHORT).show();
 
@@ -145,6 +189,8 @@ public class ProfileFragmentEditPage extends Fragment implements View.OnClickLis
         String password = profilePasswordTB.getText().toString();
         String dateofbirth = profileDateOfBirthTB.getText().toString();
         String sweight = profileWeightTB.getText().toString();
+        String sfeet = profileHeightFeetTB.getText().toString();
+        String sinches = profileHeightInchesTB.getText().toString();
 
         try {
             slashformat = new SimpleDateFormat("MM/dd/yyyy");
@@ -186,12 +232,34 @@ public class ProfileFragmentEditPage extends Fragment implements View.OnClickLis
             profileDateOfBirthTB.setError(null);
         }
 
-        Double weight = Double.parseDouble(sweight);
-        if (!sweight.isEmpty() && (weight < 100.00 || weight > 400.00)) {
-            profileWeightTB.setError("between 100 and 400");
-            valid = false;
-        } else {
-            profileWeightTB.setError(null);
+        if(!sweight.isEmpty()) {
+            Double weight = Double.parseDouble(sweight);
+            if ((weight < 100.00 || weight > 400.00)) {
+                profileWeightTB.setError("between 100 and 400");
+                valid = false;
+            } else {
+                profileWeightTB.setError(null);
+            }
+        }
+
+        if (!sfeet.isEmpty()){
+            int feet = Integer.parseInt(sfeet);
+            if(feet < 0) {
+                profileWeightTB.setError("Invalid height");
+                valid = false;
+            } else {
+                profileWeightTB.setError(null);
+            }
+        }
+
+        if (!sinches.isEmpty()){
+            int inches = Integer.parseInt(sinches);
+            if(inches < 0 || inches > 11) {
+                profileWeightTB.setError("between 0 and 11");
+                valid = false;
+            } else {
+                profileWeightTB.setError(null);
+            }
         }
 
         return valid;
