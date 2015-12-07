@@ -58,6 +58,10 @@
             android:label="DietHealthArticleActivity"
             android:theme="@style/AppTheme"></activity>
         <activity
+            android:name=".fragments.ProfileActivity"
+            android:label="Profile"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".fragments.MedicineActivityAlarmPopup"
             android:theme="@style/AppTheme.AlarmPopup"></activity>
     </application>
