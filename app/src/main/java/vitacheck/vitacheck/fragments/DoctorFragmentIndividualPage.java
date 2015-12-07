@@ -146,8 +146,10 @@ public class DoctorFragmentIndividualPage extends Fragment implements View.OnCli
                 if(phoneNumber.isEmpty()){ break; }
 
                 //link on using phone's call app: http://www.tutorialspoint.com/android/android_phone_calls.htm
-                Intent phoneCallIntent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
-                try{ startActivity(phoneCallIntent); }
+                try{
+                    /*stuff about errors: http://stackoverflow.com/questions/6341076/intent-action-call-problemsecurityexception  */
+                Intent phoneCallIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+phoneNumber));
+                startActivity(phoneCallIntent); }
                 catch (android.content.ActivityNotFoundException ex){
                     Toast.makeText(getActivity(),"Unable to call number",Toast.LENGTH_SHORT).show();
                 }
