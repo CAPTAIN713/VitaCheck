@@ -84,7 +84,8 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                     emailTB.setText(object.getEmail());
                     addressTB.setText(object.getAddress());
                     websiteTB.setText(object.getURL());
-                    visitDateTB.setText(DateFormat.getDateInstance().format(object.getVisitDate()));
+                    if(object.getVisitDate()!=null){
+                    visitDateTB.setText(DateFormat.getDateInstance().format(object.getVisitDate()));}
                 }
                 else{
                     //someting went wrong

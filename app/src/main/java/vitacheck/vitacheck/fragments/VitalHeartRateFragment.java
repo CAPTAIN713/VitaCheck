@@ -4,6 +4,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,12 +25,13 @@ import vitacheck.vitacheck.R;
 /**
  * Created by ERIC on 12/5/2015.
  */
-public class VitalHeartRateFragment extends Fragment {
+public class VitalHeartRateFragment extends Fragment  implements SwipeRefreshLayout.OnRefreshListener {
 
     /*video on recylerView can be found here: https://www.youtube.com/watch?v=Wq2o4EbM74k   */
     private RecyclerView recyclerView;
     private VitalHeartRateAdapter adapter;
     private List<VitalHeartRateInfo> vitalHeartRateList = new ArrayList<VitalHeartRateInfo>();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     
     public VitalHeartRateFragment() {
         // Required empty public constructor
@@ -51,6 +53,9 @@ public class VitalHeartRateFragment extends Fragment {
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.vitalsHeartRateList);
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) layout.findViewById(R.id.vitalsHeartRateSwipeRefreshContainer);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        
         /*sets the layout on how we want the data to be displayed
         * if we wanted to we could set it to grid or staggered layout but in this case
         * we wanted it to be list going from top to bottom so we use LinearLayout*/
@@ -85,4 +90,31 @@ public class VitalHeartRateFragment extends Fragment {
         return layout;
     }
 
+    @Override
+    public void onRefresh() {
+        vitalHeartRateList = new ArrayList<VitalHeartRateInfo>();
+        ParseObject.registerSubclass(VitalHeartRateInfo.class);
+        ParseQuery<VitalHeartRateInfo> query = new ParseQuery<VitalHeartRateInfo>("vital_heart_rate");
+        query.findInBackground(new FindCallback<VitalHeartRateInfo>() {
+            @Override
+            public void done(List<VitalHeartRateInfo> objects, com.parse.ParseException e) {
+                if (e != null) {Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();}
+                for (VitalHeartRateInfo hrObject : objects) {
+                    if (!(vitalHeartRateList.contains(hrObject))) ;
+                    VitalHeartRateInfo newHeartRate = new VitalHeartRateInfo();
+                    newHeartRate.setParseId(hrObject.getObjectId());
+                    newHeartRate.setHeartRate(hrObject.getHeartRate());
+                    newHeartRate.setUploadDate(hrObject.getCreatedAt());
+                    vitalHeartRateList.add(newHeartRate);
+                }
+                adapter = new VitalHeartRateAdapter(getActivity(), vitalHeartRateList);
+                recyclerView.setAdapter(adapter); //sets adapter to recyclerview
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            }
+        });
+        if(mSwipeRefreshLayout.isRefreshing()){
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+    }
+    
 } //end of fragment class
