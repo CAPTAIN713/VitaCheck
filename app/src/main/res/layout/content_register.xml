@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:paddingTop="5dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
@@ -83,6 +83,98 @@
                 android:inputType="numberDecimal"
                 android:hint="Weight" />
         </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Height:"
+                android:id="@+id/profileHeight"
+                android:padding="8dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:id="@+id/profileHeightFeetEditField"
+                android:layout_weight="1"
+                android:inputType="number" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ft"
+                android:id="@+id/profileHeightFeet"
+                android:padding="8dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="5"
+                android:id="@+id/profileHeightInchesEditField"
+                android:layout_weight="1"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="in"
+                android:id="@+id/profileHeightInches"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Gender:"
+                android:id="@+id/profileGender"
+                android:padding="8dp" />
+
+            <RadioGroup
+                android:id="@+id/genderRadioGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@+id/profileGender">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:id="@+id/maleRadioButton"
+                    android:checked="true"
+                    android:layout_alignBottom="@+id/profileGender"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="30dp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:id="@+id/femaleRadioButton"
+                    android:checked="false"
+                    android:layout_alignTop="@+id/maleRadioButton"
+                    android:layout_centerHorizontal="true" />
+            </RadioGroup>
+
+        </LinearLayout>
 
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton

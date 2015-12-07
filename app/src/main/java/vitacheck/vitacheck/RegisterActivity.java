@@ -2,9 +2,12 @@ package vitacheck.vitacheck;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +24,9 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mPasswordText;
     EditText mDoBText;
     EditText mWeightText;
+    EditText mHeightFt;
+    EditText mHeightIn;
+    RadioGroup mgender;
     ProgressDialog mDialog;
 
     boolean slash = false;
@@ -37,6 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordText = (EditText) findViewById(R.id.input_password);
         mWeightText = (EditText) findViewById(R.id.input_weight);
         mDoBText = (EditText) findViewById(R.id.input_dob);
+        mHeightFt = (EditText) findViewById(R.id.profileHeightFeetEditField);
+        mHeightIn = (EditText) findViewById(R.id.profileHeightInchesEditField);
+        mgender = (RadioGroup) findViewById(R.id.genderRadioGroup);
 
         Button createAccountButton = (Button) findViewById(R.id.btn_create);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /*
+        Sign Up
+        Stores data in Parse
+        Created by: Michael Kosir
+    */
     public void signup() {
 
         hideSoftKeyboard();
@@ -67,6 +81,11 @@ public class RegisterActivity extends AppCompatActivity {
         String password = mPasswordText.getText().toString();
         String sWeight = mWeightText.getText().toString();
         Double weight = Double.parseDouble(sWeight);
+        String sheightft = mHeightFt.getText().toString();
+        String sheightin = mHeightIn.getText().toString();
+        int heightin = Integer.parseInt(sheightin);
+        int heightft = Integer.parseInt(sheightft);
+
 
         if (dash)
             try {date = dashformat.parse(mDoBText.getText().toString());}
@@ -84,6 +103,19 @@ public class RegisterActivity extends AppCompatActivity {
         user.put("name", name);
         user.put("date", date);
         user.put("weight", weight);
+        user.put("height_feet", heightft);
+        user.put("height_inches", heightin);
+
+        // Check which radio button was clicked
+        switch(mgender.getId()) {
+            case R.id.maleRadioButton:
+                user.put("gender", "Male");
+                break;
+            case R.id.femaleRadioButton:
+                user.put("gender", "Female");
+                break;
+        }
+
         user.signUpInBackground();
 
         new android.os.Handler().postDelayed(
@@ -98,6 +130,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    /*
+        Sign up Successful
+        Displays account created and returns to login
+        Created by: Michael Kosir
+    */
     public void onSignupSuccess() {
         mDialog.dismiss();
         Toast.makeText(getBaseContext(), "Account Created!", Toast.LENGTH_LONG).show();
@@ -105,6 +142,11 @@ public class RegisterActivity extends AppCompatActivity {
         finish();
     }
 
+    /*
+        Invalid Input Detection
+        Alerts user if data is incorrect format
+        Created by: Michael Kosir
+     */
     public boolean validate() {
         boolean valid = true;
 
@@ -113,6 +155,8 @@ public class RegisterActivity extends AppCompatActivity {
         String password = mPasswordText.getText().toString();
         String dateofbirth = mDoBText.getText().toString();
         String sweight = mWeightText.getText().toString();
+        String sheightft = mHeightFt.getText().toString();
+        String sheightin = mHeightIn.getText().toString();
 
         try {
             slashformat = new SimpleDateFormat("MM/dd/yyyy");
@@ -165,11 +209,43 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
 
+        if (sheightft.isEmpty())
+        {
+            mHeightFt.setError("enter a valid height");
+            valid = false;
+        } else {
+            int heightft = Integer.parseInt(sheightft);
+            if (heightft<3 || heightft>8)
+            {
+                mHeightFt.setError("enter a valid height");
+                valid = false;
+            } else {
+                mHeightFt.setError(null);
+            }
+        }
+
+        if (sheightin.isEmpty())
+        {
+            mHeightIn.setError("enter a valid height");
+            valid = false;
+        } else {
+            int heightin = Integer.parseInt(sheightin);
+            if (heightin<0 || heightin>11)
+            {
+                mHeightIn.setError("enter a valid height");
+                valid = false;
+            } else {
+                mHeightIn.setError(null);
+            }
+        }
+
         return valid;
     }
 
-    /**
-     * Hides the soft keyboard
+    /*
+        Hide Keyboard
+        Hides the soft keyboard
+        Created by: Michael Kosir
      */
     public void hideSoftKeyboard() {
         if(getCurrentFocus()!=null) {
