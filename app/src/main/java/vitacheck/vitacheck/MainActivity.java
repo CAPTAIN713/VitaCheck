@@ -80,6 +80,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 //fragment= new DietHealthArticleFragment();
                 //fragment= new DietAddHealthArticleFragment();
                 break;
+            case 5:
+                Intent profileIntent = new Intent(this ,ProfileActivity.class);
+                this.startActivity(profileIntent);
+                break;
             default:
                 break;
         }
