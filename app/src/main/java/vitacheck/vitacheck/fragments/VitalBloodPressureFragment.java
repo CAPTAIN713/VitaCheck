@@ -99,13 +99,15 @@ public class VitalBloodPressureFragment extends Fragment  implements SwipeRefres
             public void done(List<VitalBloodPressureInfo> objects, com.parse.ParseException e) {
                 if (e != null) {Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();}
                 for (VitalBloodPressureInfo hrObject : objects) {
-                    if (!(vitalBloodPressureList.contains(hrObject))) ;
-                    VitalBloodPressureInfo newBloodPressure = new VitalBloodPressureInfo();
-                    newBloodPressure.setParseId(hrObject.getObjectId());
-                    newBloodPressure.setFirstNumber(hrObject.getFirstNumber());
-                    newBloodPressure.setSecondNumber(hrObject.getSecondNumber());
-                    newBloodPressure.setUploadDate(hrObject.getCreatedAt());
-                    vitalBloodPressureList.add(newBloodPressure);
+                    if (hrObject.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        if (!(vitalBloodPressureList.contains(hrObject))) ;
+                        VitalBloodPressureInfo newBloodPressure = new VitalBloodPressureInfo();
+                        newBloodPressure.setParseId(hrObject.getObjectId());
+                        newBloodPressure.setFirstNumber(hrObject.getFirstNumber());
+                        newBloodPressure.setSecondNumber(hrObject.getSecondNumber());
+                        newBloodPressure.setUploadDate(hrObject.getCreatedAt());
+                        vitalBloodPressureList.add(newBloodPressure);
+                    }
                 }
                 adapter = new VitalBloodPressureAdapter(getActivity(), vitalBloodPressureList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview
