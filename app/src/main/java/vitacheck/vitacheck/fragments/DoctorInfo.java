@@ -1,6 +1,7 @@
 package vitacheck.vitacheck.fragments;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 import java.util.Date;
@@ -46,4 +47,11 @@ public class DoctorInfo extends ParseObject {
 
     public String getUserId() {return getString("user_id");}
     public void setUserId(String user_id) {put("user_id",user_id);}
+
+    public ParseFile getFrontPhotoFile() {return getParseFile("card_photo_front");}
+    public void setFrontPhotoFile(ParseFile file) {put("card_photo_front", file);}
+
+    public ParseFile getBackPhotoFile() {return getParseFile("card_photo_back");}
+    public void setBackPhotoFile(ParseFile file) {put("card_photo_back", file);}
+
 }

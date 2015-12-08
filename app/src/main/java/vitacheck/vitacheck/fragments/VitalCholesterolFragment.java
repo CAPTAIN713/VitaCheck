@@ -97,12 +97,14 @@ public class VitalCholesterolFragment extends Fragment  implements SwipeRefreshL
             public void done(List<VitalCholesterolInfo> objects, com.parse.ParseException e) {
                 if (e != null) {Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();}
                 for (VitalCholesterolInfo hrObject : objects) {
-                    if (!(vitalCholesterolList.contains(hrObject))) ;
-                    VitalCholesterolInfo newCholesterol = new VitalCholesterolInfo();
-                    newCholesterol.setParseId(hrObject.getObjectId());
-                    newCholesterol.setCholesterol(hrObject.getCholesterol());
-                    newCholesterol.setUploadDate(hrObject.getCreatedAt());
-                    vitalCholesterolList.add(newCholesterol);
+                    if (hrObject.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        if (!(vitalCholesterolList.contains(hrObject))) ;
+                        VitalCholesterolInfo newCholesterol = new VitalCholesterolInfo();
+                        newCholesterol.setParseId(hrObject.getObjectId());
+                        newCholesterol.setCholesterol(hrObject.getCholesterol());
+                        newCholesterol.setUploadDate(hrObject.getCreatedAt());
+                        vitalCholesterolList.add(newCholesterol);
+                    }
                 }
                 adapter = new VitalCholesterolAdapter(getActivity(), vitalCholesterolList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview

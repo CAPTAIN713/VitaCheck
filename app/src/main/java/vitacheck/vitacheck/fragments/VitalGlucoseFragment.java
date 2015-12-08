@@ -98,12 +98,14 @@ public class VitalGlucoseFragment extends Fragment  implements SwipeRefreshLayou
             public void done(List<VitalGlucoseInfo> objects, com.parse.ParseException e) {
                 if (e != null) {Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();}
                 for (VitalGlucoseInfo hrObject : objects) {
-                    if (!(vitalGlucoseList.contains(hrObject))) ;
-                    VitalGlucoseInfo newGlucose = new VitalGlucoseInfo();
-                    newGlucose.setParseId(hrObject.getObjectId());
-                    newGlucose.setGlucose(hrObject.getGlucose());
-                    newGlucose.setUploadDate(hrObject.getCreatedAt());
-                    vitalGlucoseList.add(newGlucose);
+                    if (hrObject.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        if (!(vitalGlucoseList.contains(hrObject))) ;
+                        VitalGlucoseInfo newGlucose = new VitalGlucoseInfo();
+                        newGlucose.setParseId(hrObject.getObjectId());
+                        newGlucose.setGlucose(hrObject.getGlucose());
+                        newGlucose.setUploadDate(hrObject.getCreatedAt());
+                        vitalGlucoseList.add(newGlucose);
+                    }
                 }
                 adapter = new VitalGlucoseAdapter(getActivity(), vitalGlucoseList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview

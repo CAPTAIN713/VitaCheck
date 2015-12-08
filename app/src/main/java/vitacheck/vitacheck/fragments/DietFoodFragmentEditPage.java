@@ -104,7 +104,7 @@ public class DietFoodFragmentEditPage extends Fragment implements View.OnClickLi
                     @Override
                     public void done(DietFoodInfo object, ParseException e) {
                         if (e == null) {
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
                             //something went right
                             object.setFoodName((dietFoodNameTB.getText().toString()));
                             object.setFoodCalories(Integer.parseInt(dietFoodCaloriesTB.getText().toString()));
@@ -125,12 +125,12 @@ public class DietFoodFragmentEditPage extends Fragment implements View.OnClickLi
                         }
                     }
                 });
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                /*FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 Fragment dietFoodFragment = new DietFoodFragmentIndividualPage();
                 //video on passing bundles to fragments https://www.youtube.com/watch?v=Je9A8lxGDLY
                 dietFoodFragment.setArguments(extrasBundle);
                 transaction.replace(R.id.dietFoodActivityContainer, dietFoodFragment);
-                transaction.commit();
+                transaction.commit();*/
                 break;
 
         }
