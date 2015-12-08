@@ -36,6 +36,7 @@ public class DietFragment extends Fragment  {
                 fragment = new DietFoodFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -49,6 +50,7 @@ public class DietFragment extends Fragment  {
                 fragment = new DietRecipeFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
@@ -61,6 +63,7 @@ public class DietFragment extends Fragment  {
                 fragment = new DietHealthArticleFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import vitacheck.vitacheck.MainActivity;
 import vitacheck.vitacheck.R;
 
 /**
@@ -40,6 +41,9 @@ public class DietFoodFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        dietFoodParseList = new ArrayList<DietFoodInfo>();
+
+        ((MainActivity) getActivity()).setTitle("Food");
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_diet_food, container, false);
 
@@ -81,12 +85,12 @@ public class DietFoodFragment extends Fragment {
 
             addFoodButton = (FloatingActionButton) layout.findViewById(R.id.addFoodButton);
             addFoodButton.setOnClickListener(new View.OnClickListener() {
-                Fragment fragment = null;
                 @Override
                 public void onClick(View v) {
-                    fragment = new DietAddFoodFragment();
+                    Fragment fragment = new DietAddFoodFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.container, fragment);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 }
             });

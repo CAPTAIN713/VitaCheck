@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import vitacheck.vitacheck.MainActivity;
 import vitacheck.vitacheck.R;
 
 public class DietRecipeFragment extends Fragment {
@@ -35,6 +36,9 @@ public class DietRecipeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        dietRecipeParseList = new ArrayList<DietRecipeInfo>();
+        ((MainActivity) getActivity()).setTitle("Recipes");
 
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_diet_recipe, container, false);
@@ -54,7 +58,9 @@ public class DietRecipeFragment extends Fragment {
                     Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();
                 }
 
-                for (DietRecipeInfo rec : objects) {
+                for (DietRecipeInfo rec : objects)
+                    if(rec.getUserId().equals(GlobalVariable.getUserId(getActivity())))
+                    {
                     DietRecipeInfo newrec = new DietRecipeInfo();
                     newrec.setParseID(rec.getObjectId());
                     newrec.setRecipeName(rec.getRecipeName());
@@ -81,6 +87,7 @@ public class DietRecipeFragment extends Fragment {
                 fragment = new DietAddRecipeFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
