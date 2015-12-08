@@ -26,7 +26,6 @@
 
     <style name="AppTheme.AlarmPopup">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
     <style name="AppTheme.TimePicker" parent="android:Theme.Material.Light">

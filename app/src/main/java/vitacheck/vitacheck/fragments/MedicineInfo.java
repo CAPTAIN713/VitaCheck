@@ -37,4 +37,10 @@ public class MedicineInfo extends ParseObject {
 
     public String getNote() {return getString("note");}
     public void setNote(String note) {put("note",note);}
+
+    public int getAlarmHour() {return getInt("alarm_hour");}
+    public void setAlarmHour(int num) {put("alarm_hour",num);}
+
+    public int getAlarmMinute() {return getInt("alarm_minute");}
+    public void setAlarmMinute(int num) {put("alarm_minute",num);}
 }
