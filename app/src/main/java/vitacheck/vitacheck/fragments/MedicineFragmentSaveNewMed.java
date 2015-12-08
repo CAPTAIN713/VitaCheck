@@ -85,9 +85,6 @@ public class MedicineFragmentSaveNewMed  extends Fragment implements View.OnClic
                 newMedicine.setPrescribedBy(prescribedByTB.getText().toString());
                 newMedicine.setUserId(GlobalVariable.getUserId(this));
 
-                newMedicine.saveInBackground();
-                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-
                 if(reminderCheckBox.isChecked()) {
                     Context baseContext = getActivity().getApplicationContext();
                     Intent intent = new Intent(context, MedicineActivityAlarmPopup.class);
@@ -109,6 +106,13 @@ public class MedicineFragmentSaveNewMed  extends Fragment implements View.OnClic
                     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
                     Toast.makeText(context, "Alarm set for " + alarmCalendar.getTime(), Toast.LENGTH_LONG).show();
                 }
+                else{
+                    newMedicine.setAlarmHour(-1);
+                    newMedicine.setAlarmMinute(-1);
+                }
+
+                newMedicine.saveInBackground();
+                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
 
                 Fragment fragment = new MedicineFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();

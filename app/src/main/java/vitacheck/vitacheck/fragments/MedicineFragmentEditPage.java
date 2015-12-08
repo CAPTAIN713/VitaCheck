@@ -71,7 +71,6 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
         extrasBundle = getArguments();
 
         if( !(extrasBundle.isEmpty()) && (extrasBundle.containsKey("parseID")) ){
@@ -113,6 +112,12 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                     dosageAmountTB.setText(String.valueOf(object.getDosageAmount()));
                     dosagePerDayTB.setText(String.valueOf(object.getDosagePerDay()));
                     prescribedByTB.setText(object.getPrescribedBy());
+                    int alarmHour =  object.getAlarmHour();
+                    int alarmMinute = object.getAlarmMinute();
+                    if(alarmHour != -1 && alarmMinute != -1){
+                        medicineTimePicker.setCurrentHour(alarmHour);
+                        medicineTimePicker.setCurrentMinute(alarmMinute);
+                    }
                 }
                 else{
                     //someting went wrong
@@ -132,6 +137,46 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                     Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
                     break;
                 }
+
+                int alarmHour = -1;
+                int alarmMinute = -1;
+                if(reminderCheckBox.isChecked()) {
+                    Context baseContext = getActivity().getApplicationContext();
+
+                    Intent intent = new Intent(context, MedicineActivityAlarmPopup.class);
+                    intent.putExtra("name", medicineNameTB.getText().toString());
+                    intent.putExtra("dosage", dosageAmountTB.getText().toString());
+
+                    int id = new Random().nextInt(100);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                    Calendar alarmCalendar = Calendar.getInstance();
+                    int timePickerMinute = medicineTimePicker.getCurrentMinute();
+                    int timePickerHour = medicineTimePicker.getCurrentHour();
+                    //If picked time has already passed, "roll" date forward.
+                    if (timePickerHour < alarmCalendar.get(Calendar.HOUR_OF_DAY))
+                        alarmCalendar.roll(Calendar.DATE, true);
+                    else if (timePickerHour == alarmCalendar.get(Calendar.HOUR)) {
+                        if (timePickerMinute < alarmCalendar.get(Calendar.MINUTE))
+                            alarmCalendar.roll(Calendar.DATE, true);
+                        else if (timePickerMinute == alarmCalendar.get(Calendar.MINUTE))
+                            alarmCalendar.add(Calendar.SECOND, 5);
+                    }
+
+                    alarmCalendar.set(Calendar.HOUR, timePickerHour);
+                    alarmCalendar.set(Calendar.MINUTE, timePickerMinute);
+
+                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
+                    alarmHour = alarmCalendar.get(Calendar.HOUR_OF_DAY);
+                    alarmMinute = alarmCalendar.get(Calendar.MINUTE);
+
+                    Toast.makeText(context, "Alarm set for " + alarmCalendar.getTime(), Toast.LENGTH_LONG).show();
+                }
+
+                final int finalHour = alarmHour;
+                final int finalMinute = alarmMinute;
+
                 ParseObject.registerSubclass(MedicineInfo.class);
                 ParseQuery<MedicineInfo> query = ParseQuery.getQuery("medicine");
                 query.getInBackground(selectedItemParseID, new GetCallback<MedicineInfo>() {
@@ -144,33 +189,19 @@ public class MedicineFragmentEditPage extends Fragment implements View.OnClickLi
                             object.setDosageAmount(Integer.parseInt(dosageAmountTB.getText().toString()));
                             object.setDosagePerDay(Integer.parseInt(dosagePerDayTB.getText().toString()));
                             object.setPrescribedBy(prescribedByTB.getText().toString());
+                            if(finalHour != -1) {
+                                object.setAlarmHour(finalHour);
+                                object.setAlarmMinute(finalMinute);
+                            }
+                            else{
+                                object.setAlarmHour(-1);
+                                object.setAlarmMinute(-1);
+                            }
                             object.saveInBackground();
                             Toast.makeText(context, "Saved Changes", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-                if(reminderCheckBox.isChecked()) {
-                    Context baseContext = getActivity().getApplicationContext();
-                    Intent intent = new Intent(context, MedicineActivityAlarmPopup.class);
-                    intent.putExtra("name", medicineNameTB.getText().toString());
-                    intent.putExtra("dosage", dosageAmountTB.getText().toString());
-                    int id = new Random().nextInt(100);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    Calendar alarmCalendar = Calendar.getInstance();
-                    int timePickerMinute = medicineTimePicker.getCurrentMinute();
-                    int timePickerHour = medicineTimePicker.getCurrentHour();
-                    //If picked time has already passed, "roll" date forward.
-                    if (timePickerHour < alarmCalendar.get(Calendar.HOUR))
-                        alarmCalendar.roll(Calendar.DATE, true);
-                    else if (timePickerHour == alarmCalendar.get(Calendar.HOUR) && timePickerMinute <= alarmCalendar.get(Calendar.MINUTE))
-                        alarmCalendar.roll(Calendar.DATE, true);
-                    alarmCalendar.set(Calendar.HOUR, timePickerHour);
-                    alarmCalendar.set(Calendar.MINUTE, timePickerMinute);
-                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmCalendar.getTimeInMillis(), pendingIntent);
-                    Toast.makeText(context, "Alarm set for " + alarmCalendar.getTime(), Toast.LENGTH_LONG).show();
-                }
 
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 Fragment medicineFragment = new MedicineFragmentIndividualPage();

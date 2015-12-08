@@ -70,7 +70,6 @@ public class DietFoodFragment extends Fragment {
                     newDietFood.setParseID(food.getObjectId());
                     newDietFood.setFoodName(food.getFoodName());
                     newDietFood.setFoodCalories(food.getFoodCalories());
-                    newDietFood.setFoodDate(food.getFoodDate());
                     dietFoodParseList.add(newDietFood);
                 }
                 /*have to make adapter and set here because if set outside done method and after

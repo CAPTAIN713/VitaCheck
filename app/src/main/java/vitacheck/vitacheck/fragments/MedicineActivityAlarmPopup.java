@@ -24,7 +24,7 @@ public class MedicineActivityAlarmPopup extends Activity implements View.OnClick
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_medicine_alarm_popup);
-        getWindow().setLayout(800, 400);
+        getWindow().setLayout(900, 600);
 
         extrasBundle = getIntent().getExtras();
 

@@ -81,7 +81,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             case R.id.searchButton:
                 ParseObject.registerSubclass(DietFoodInfo.class);
                 ParseQuery<DietFoodInfo> query = new ParseQuery<DietFoodInfo>("diet_food");
-                query.whereContains("name",search_input.getText().toString());
+                query.whereContains("name", search_input.getText().toString());
                  query.findInBackground(new FindCallback<DietFoodInfo>() {
                      @Override
                      public void done(List<DietFoodInfo> objects, com.parse.ParseException e) {
@@ -97,6 +97,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                  newFood.setParseID(food.getObjectId());
                                  newFood.setFoodName(food.getFoodName());
                                  newFood.setFoodCalories(food.getFoodCalories());
+                                 newFood.setUserId(GlobalVariable.getUserId(getActivity()));
+
                                  dietFoodList.add(newFood);
 
 
@@ -112,7 +114,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 query2.findInBackground(new FindCallback<DietRecipeInfo>() {
                     @Override
                     public void done(List<DietRecipeInfo> objects, com.parse.ParseException e) {
-                           if (e != null) {
+                        if (e != null) {
                             Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();
 
                         }
@@ -122,6 +124,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 DietRecipeInfo newRecipe = new DietRecipeInfo();
                                 newRecipe.setParseID(recipe.getObjectId());
                                 newRecipe.setRecipeName(recipe.getRecipeName());
+                                newRecipe.setUserId(GlobalVariable.getUserId(getActivity()));
+
                                 dietRecipeList.add(newRecipe);
 
                             }
@@ -143,6 +147,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 DietRecipeInfo newRecipe = new DietRecipeInfo();
                                 newRecipe.setParseID(recipe.getObjectId());
                                 newRecipe.setRecipeName(recipe.getRecipeName());
+                                newRecipe.setUserId(GlobalVariable.getUserId(getActivity()));
                                 dietRecipeList.add(newRecipe);
 
                             }
@@ -164,6 +169,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 DietRecipeInfo newRecipe = new DietRecipeInfo();
                                 newRecipe.setParseID(recipe.getObjectId());
                                 newRecipe.setRecipeName(recipe.getRecipeName());
+                                newRecipe.setUserId(GlobalVariable.getUserId(getActivity()));
                                 dietRecipeList.add(newRecipe);
 
                             }
@@ -187,8 +193,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 DietHealthArticleInfo newHealth = new DietHealthArticleInfo();
                                 newHealth.setParseID(health.getObjectId());
                                 newHealth.setHealthName(health.getHealthName());
-                                newHealth.setHealthURL(health.getHealthURL());
-                                newHealth.setHealthDescription(health.getHealthDescription());
+                                newHealth.setUserId(GlobalVariable.getUserId(getActivity()));
                                 dietHealthList.add(newHealth);
                             }
                         }
@@ -212,8 +217,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 DietHealthArticleInfo newHealth = new DietHealthArticleInfo();
                                 newHealth.setParseID(health.getObjectId());
                                 newHealth.setHealthName(health.getHealthName());
-                                newHealth.setHealthURL(health.getHealthURL());
-                                newHealth.setHealthDescription(health.getHealthDescription());
+                                newHealth.setUserId(GlobalVariable.getUserId(getActivity()));
                                 dietHealthList.add(newHealth);
                             }
                         }
@@ -236,8 +240,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 DietHealthArticleInfo newHealth = new DietHealthArticleInfo();
                                 newHealth.setParseID(health.getObjectId());
                                 newHealth.setHealthName(health.getHealthName());
-                                newHealth.setHealthURL(health.getHealthURL());
-                                newHealth.setHealthDescription(health.getHealthDescription());
+                                newHealth.setUserId(GlobalVariable.getUserId(getActivity()));
                                 dietHealthList.add(newHealth);
                             }
                         }
@@ -262,7 +265,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newDoc.setParseId(doc.getObjectId());
                                 newDoc.setName(doc.getName());
                                 newDoc.setDoctorType(doc.getDoctorType());
-                                newDoc.setUserId(doc.getUserId());
+                                newDoc.setUserId(GlobalVariable.getUserId(getActivity()));
                                 doctorList.add(newDoc);
 
                             }
@@ -286,7 +289,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newDoc.setParseId(doc.getObjectId());
                                 newDoc.setName(doc.getName());
                                 newDoc.setDoctorType(doc.getDoctorType());
-                                newDoc.setUserId(doc.getUserId());
+                                newDoc.setUserId(GlobalVariable.getUserId(getActivity()));
                                 doctorList.add(newDoc);
 
                             }
@@ -309,7 +312,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newDoc.setParseId(doc.getObjectId());
                                 newDoc.setName(doc.getName());
                                 newDoc.setDoctorType(doc.getDoctorType());
-                                newDoc.setUserId(doc.getUserId());
+                                newDoc.setUserId(GlobalVariable.getUserId(getActivity()));
                                 doctorList.add(newDoc);
 
                             }
@@ -332,7 +335,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newDoc.setParseId(doc.getObjectId());
                                 newDoc.setName(doc.getName());
                                 newDoc.setDoctorType(doc.getDoctorType());
-                                newDoc.setUserId(doc.getUserId());
+                                newDoc.setUserId(GlobalVariable.getUserId(getActivity()));
                                 doctorList.add(newDoc);
 
                             }
@@ -355,7 +358,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newDoc.setParseId(doc.getObjectId());
                                 newDoc.setName(doc.getName());
                                 newDoc.setDoctorType(doc.getDoctorType());
-                                newDoc.setUserId(doc.getUserId());
+                                newDoc.setUserId(GlobalVariable.getUserId(getActivity()));
                                 doctorList.add(newDoc);
 
                             }
@@ -364,8 +367,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 });
 
                 ParseObject.registerSubclass(MedicineInfo.class);
-                ParseQuery<MedicineInfo> query13 = new ParseQuery<MedicineInfo>("doctor");
-                query13.whereContains("medicine_name", search_input.getText().toString());
+                ParseQuery<MedicineInfo> query13 = new ParseQuery<MedicineInfo>("medication");
+                query13.whereContains("name", search_input.getText().toString());
                 query13.findInBackground(new FindCallback<MedicineInfo>() {
                     @Override
                     public void done(List<MedicineInfo> objects, com.parse.ParseException e) {
@@ -380,13 +383,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newmed.setParseId(med.getObjectId());
                                 newmed.setName(med.getName());
                                 newmed.setNote(med.getNote());
+                                newmed.setUserId(GlobalVariable.getUserId(getActivity()));
                                 medicineList.add(newmed);
 
                             }
 
                     }
                 });
-                ParseQuery<MedicineInfo> query14 = new ParseQuery<MedicineInfo>("doctor");
+                ParseQuery<MedicineInfo> query14 = new ParseQuery<MedicineInfo>("medication");
                 query14.whereContains("note", search_input.getText().toString());
                 query14.findInBackground(new FindCallback<MedicineInfo>() {
                     @Override
@@ -402,14 +406,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                                 newmed.setParseId(med.getObjectId());
                                 newmed.setName(med.getName());
                                 newmed.setNote(med.getNote());
+                                newmed.setUserId(GlobalVariable.getUserId(getActivity()));
                                 medicineList.add(newmed);
-
                             }
 
                     }
                 });
-
-
 
                 foodAdapter = new DietFoodAdapter(getActivity(), dietFoodList);
                 foodRecyclerView.setAdapter(foodAdapter); //sets adapter to recyclerview
@@ -430,6 +432,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 medicineAdapter = new MedicineAdapter(getActivity(), medicineList);
                 medicineRecyclerView.setAdapter(medicineAdapter); //sets adapter to recyclerview
                 medicineRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
         }
 
     }
