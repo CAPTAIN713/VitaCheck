@@ -84,6 +84,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 Intent profileIntent = new Intent(this ,ProfileActivity.class);
                 this.startActivity(profileIntent);
                 break;
+            case 6:
+                //Search goes here.
+                //If its a fragment:
+                //fragment = new SearchFragment(); or whatever its called
+                //If its an activity:
+                //Intent profileIntent = new Intent(this ,ProfileActivity.class);
+                //this.startActivity(profileIntent);
+                break;
             default:
                 break;
         }
