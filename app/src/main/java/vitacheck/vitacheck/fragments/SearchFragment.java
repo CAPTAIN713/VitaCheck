@@ -363,7 +363,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-                ParseObject.registerSubclass(DoctorInfo.class);
+                ParseObject.registerSubclass(MedicineInfo.class);
                 ParseQuery<MedicineInfo> query13 = new ParseQuery<MedicineInfo>("doctor");
                 query13.whereContains("medicine_name", search_input.getText().toString());
                 query13.findInBackground(new FindCallback<MedicineInfo>() {
