@@ -58,7 +58,7 @@ public class DietAddFoodFragment  extends Fragment implements View.OnClickListen
             case R.id.saveFoodButton:
                 ParseObject.registerSubclass(DietFoodInfo.class);
                 DietFoodInfo food = new DietFoodInfo();
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
                 if ((foodNameTB.getText().toString()).compareTo("") == 0) {
                     Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
                     break;
@@ -85,10 +85,7 @@ public class DietAddFoodFragment  extends Fragment implements View.OnClickListen
                     getFragmentManager().popBackStack();
                 }
 
-                Fragment fragment = new DietFoodFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, fragment);
-                transaction.commit();
+
                 break;
         }
     }

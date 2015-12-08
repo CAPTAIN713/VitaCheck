@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import vitacheck.vitacheck.MainActivity;
 import vitacheck.vitacheck.R;
 
 public class DietHealthArticleFragment extends Fragment {
@@ -35,7 +36,9 @@ public class DietHealthArticleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        dietHealthParseList = new ArrayList<DietHealthArticleInfo>();
 
+        ((MainActivity) getActivity()).setTitle("Health Article");
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_diet_health, container, false);
 
@@ -55,6 +58,7 @@ public class DietHealthArticleFragment extends Fragment {
                 }
 
                 for (DietHealthArticleInfo health: objects)
+                    if(health.getUserId().equals(GlobalVariable.getUserId(getActivity())))
                 {
                     DietHealthArticleInfo newhealth = new DietHealthArticleInfo();
                     newhealth.setParseID(health.getObjectId());
@@ -87,6 +91,7 @@ public class DietHealthArticleFragment extends Fragment {
                 fragment = new DietAddHealthArticleFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
