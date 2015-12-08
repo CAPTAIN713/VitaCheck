@@ -96,12 +96,14 @@ public class VitalSignsWeightFragment extends Fragment implements SwipeRefreshLa
             public void done(List<VitalWeightInfo> objects, com.parse.ParseException e) {
                 if (e != null) {Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();}
                 for (VitalWeightInfo hrObject : objects) {
-                    if (!(vitalWeightList.contains(hrObject))) ;
-                    VitalWeightInfo newWeight = new VitalWeightInfo();
-                    newWeight.setParseId(hrObject.getObjectId());
-                    newWeight.setWeight(hrObject.getWeight());
-                    newWeight.setUploadDate(hrObject.getCreatedAt());
-                    vitalWeightList.add(newWeight);
+                    if (hrObject.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        if (!(vitalWeightList.contains(hrObject))) ;
+                        VitalWeightInfo newWeight = new VitalWeightInfo();
+                        newWeight.setParseId(hrObject.getObjectId());
+                        newWeight.setWeight(hrObject.getWeight());
+                        newWeight.setUploadDate(hrObject.getCreatedAt());
+                        vitalWeightList.add(newWeight);
+                    }
                 }
                 adapter = new VitalWeightAdapter(getActivity(), vitalWeightList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview

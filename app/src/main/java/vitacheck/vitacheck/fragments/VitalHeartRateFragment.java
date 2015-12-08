@@ -100,12 +100,14 @@ public class VitalHeartRateFragment extends Fragment  implements SwipeRefreshLay
             public void done(List<VitalHeartRateInfo> objects, com.parse.ParseException e) {
                 if (e != null) {Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();}
                 for (VitalHeartRateInfo hrObject : objects) {
-                    if (!(vitalHeartRateList.contains(hrObject))) ;
-                    VitalHeartRateInfo newHeartRate = new VitalHeartRateInfo();
-                    newHeartRate.setParseId(hrObject.getObjectId());
-                    newHeartRate.setHeartRate(hrObject.getHeartRate());
-                    newHeartRate.setUploadDate(hrObject.getCreatedAt());
-                    vitalHeartRateList.add(newHeartRate);
+                    if (hrObject.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        if (!(vitalHeartRateList.contains(hrObject))) ;
+                        VitalHeartRateInfo newHeartRate = new VitalHeartRateInfo();
+                        newHeartRate.setParseId(hrObject.getObjectId());
+                        newHeartRate.setHeartRate(hrObject.getHeartRate());
+                        newHeartRate.setUploadDate(hrObject.getCreatedAt());
+                        vitalHeartRateList.add(newHeartRate);
+                    }
                 }
                 adapter = new VitalHeartRateAdapter(getActivity(), vitalHeartRateList);
                 recyclerView.setAdapter(adapter); //sets adapter to recyclerview

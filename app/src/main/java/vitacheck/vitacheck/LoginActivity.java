@@ -193,7 +193,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-            focusView.requestFocus();
+            //focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
@@ -323,9 +323,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
 
-            if (success) {
+            mAuthTask = null;
+            if(success==null)
+            {
+                mDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Email/Password Incorrect", Toast.LENGTH_LONG).show();
+            }
+
+            else if (success) {
                 //go to main activity
                 ((ParseApplication) getApplication()).setUserId(mEmail);
                 mDialog.dismiss();
