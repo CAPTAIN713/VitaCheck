@@ -107,7 +107,9 @@ public class DoctorFragmentIndividualPage extends Fragment implements View.OnCli
                     doctorNameTB.setText(object.getName());
                     doctorTypeTB.setText(object.getDoctorType());
                     insuranceTB.setText(object.getInsurance());
-                    phoneNumberTB.setText(String.valueOf(object.getPhoneNum()));
+                    if(object.getPhoneNum()!=0) {
+                        phoneNumberTB.setText(String.valueOf(object.getPhoneNum()));
+                    }
                     phoneNumber=String.valueOf(object.getPhoneNum());
                     emailTB.setText(object.getEmail());
                     email=String.valueOf(object.getEmail());
