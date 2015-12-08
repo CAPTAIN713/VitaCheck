@@ -157,8 +157,7 @@
             android:id="@+id/doctorAddressIndv"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/doctorAddress"
-            android:textColor="#5771f0"
-            android:text="fdsg" />
+            android:textColor="#5771f0" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -181,7 +180,6 @@
             android:id="@+id/doctorWebsiteIndv"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/doctorWebsite"
-            android:text="adfasdfdf"
             android:textColor="#5771f0" />
     </RelativeLayout>
 

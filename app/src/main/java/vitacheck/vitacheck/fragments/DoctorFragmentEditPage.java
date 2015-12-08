@@ -80,7 +80,12 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                     doctorNameTB.setText(object.getName());
                     doctorTypeTB.setText(object.getDoctorType());
                     insuranceTB.setText(object.getInsurance());
-                    phoneNumberTB.setText(String.valueOf(object.getPhoneNum()));
+                    if(object.getPhoneNum()!=0) {
+                        phoneNumberTB.setText(String.valueOf(object.getPhoneNum()));
+                    }
+                    else{
+                        phoneNumberTB.setText("");
+                    }
                     emailTB.setText(object.getEmail());
                     addressTB.setText(object.getAddress());
                     websiteTB.setText(object.getURL());
@@ -116,7 +121,12 @@ public class DoctorFragmentEditPage extends Fragment implements View.OnClickList
                             object.setName((doctorNameTB.getText().toString()));
                             object.setDoctorType(doctorTypeTB.getText().toString());
                             object.setInsurance(insuranceTB.getText().toString());
-                            object.setPhoneNum(Long.parseLong(phoneNumberTB.getText().toString()));
+                            if(phoneNumberTB.getText().toString().isEmpty()){
+                                object.setPhoneNum((long) 0);
+                            }
+                            else {
+                                object.setPhoneNum(Long.parseLong(phoneNumberTB.getText().toString()));
+                            }
                             object.setEmail(emailTB.getText().toString());
                             object.setAddress(addressTB.getText().toString());
                             object.setURL(websiteTB.getText().toString());
