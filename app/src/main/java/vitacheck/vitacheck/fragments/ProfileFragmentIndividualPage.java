@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class ProfileFragmentIndividualPage extends Fragment implements View.OnCl
     private Context context;
 
     private TextView profileNameTB,profileEmailTB,profileDateOfBirthTB,profileWeightTB;
+    private TextView profileHeightFeetTB,profileHeightInchesTB,profileGenderTB;
     private Button editButton;
 
     @Override
@@ -60,6 +62,9 @@ public class ProfileFragmentIndividualPage extends Fragment implements View.OnCl
         profileEmailTB=(TextView) layout.findViewById(R.id.profileEmailIndv);
         profileDateOfBirthTB=(TextView) layout.findViewById(R.id.profileDateOfBirthIndv);
         profileWeightTB=(TextView) layout.findViewById(R.id.profileWeightIndv);
+        profileHeightFeetTB=(TextView) layout.findViewById(R.id.profileHeightFeetIndv);
+        profileHeightInchesTB=(TextView) layout.findViewById(R.id.profileHeightInchesIndv);
+        profileGenderTB=(TextView) layout.findViewById(R.id.profileGenderIndv);
 
         editButton = (Button) layout.findViewById(R.id.editProfileButton);
         editButton.setOnClickListener(this);
@@ -68,6 +73,9 @@ public class ProfileFragmentIndividualPage extends Fragment implements View.OnCl
         profileNameTB.setText(String.valueOf(currentUser.get("name")));
         profileEmailTB.setText(String.valueOf(currentUser.get("email")));
         profileWeightTB.setText(String.valueOf(currentUser.get("weight")));
+        profileHeightFeetTB.setText(String.valueOf(currentUser.get("height_feet")));
+        profileHeightInchesTB.setText(String.valueOf(currentUser.get("height_inches")));
+        profileGenderTB.setText(String.valueOf(currentUser.get("gender")));
 
         Date dateOfBirth = (Date)currentUser.get("date");
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
