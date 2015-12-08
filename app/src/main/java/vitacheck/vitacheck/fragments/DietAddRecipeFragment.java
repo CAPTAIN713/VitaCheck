@@ -77,10 +77,7 @@ public class DietAddRecipeFragment  extends Fragment implements View.OnClickList
                     getFragmentManager().popBackStack();
                 }
 
-                Fragment fragment = new DietRecipeFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, fragment);
-                transaction.commit();
+
                 break;
         }
 

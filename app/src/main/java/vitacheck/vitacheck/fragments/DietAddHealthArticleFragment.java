@@ -58,7 +58,7 @@ public class DietAddHealthArticleFragment  extends Fragment implements View.OnCl
             case R.id.saveHealthButton:
                 ParseObject.registerSubclass(DietHealthArticleInfo.class);
                 DietHealthArticleInfo health = new DietHealthArticleInfo();
-
+                health.setUserId(GlobalVariable.getUserId(this));
                 if ((healthNameTB.getText().toString()).compareTo("") == 0) {
                     Toast.makeText(context, "Please fill out the name field", Toast.LENGTH_SHORT).show();
                     break;
@@ -68,7 +68,7 @@ public class DietAddHealthArticleFragment  extends Fragment implements View.OnCl
                 health.setHealthURL(healthURLTB.getText().toString());
                 health.setHealthDescription(healthNoteTB.getText().toString());
 
-                health.setUserId(GlobalVariable.getUserId(this));
+
                 health.saveInBackground();
                 Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
 
@@ -77,10 +77,7 @@ public class DietAddHealthArticleFragment  extends Fragment implements View.OnCl
                     getFragmentManager().popBackStack();
                 }
 
-                Fragment fragment = new DietHealthArticleFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.container, fragment);
-                transaction.commit();
+
                 break;
         }
 
