@@ -151,6 +151,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            ParseUser.logOut();
+            Intent myIntent = new Intent(MainActivity.this ,LoginActivity.class);
+            startActivity(myIntent);
+            finish();
             return true;
         }
 
