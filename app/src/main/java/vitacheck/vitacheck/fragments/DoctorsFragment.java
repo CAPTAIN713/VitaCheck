@@ -61,13 +61,15 @@ public class DoctorsFragment extends Fragment{
                 if (e != null) {
                     Toast.makeText(getView().getContext(), "Error " + e, Toast.LENGTH_SHORT).show();
                 }
-
                 for (DoctorInfo doc : objects) {
-                    DoctorInfo newdoc = new DoctorInfo();
-                    newdoc.setParseId(doc.getObjectId());
-                    newdoc.setName(doc.getName());
-                    newdoc.setDoctorType(doc.getDoctorType());
-                    doctorParseList.add(newdoc);
+                    if(doc.getUserId().equals(GlobalVariable.getUserId(getActivity()))) {
+                        DoctorInfo newdoc = new DoctorInfo();
+                        newdoc.setParseId(doc.getObjectId());
+                        newdoc.setName(doc.getName());
+                        newdoc.setDoctorType(doc.getDoctorType());
+                        newdoc.setUserId(GlobalVariable.getUserId(getActivity()));
+                        doctorParseList.add(newdoc);
+                    }
                 }
                 /*have to make adapter and set here because if set outside done method and after
                 data will not appear because it sets the data before it is pulled from parse
