@@ -58,7 +58,6 @@ public class DietFoodAdapter extends RecyclerView.Adapter<DietFoodAdapter.MyView
         /*sets data that will be displayed in the recyclerview_diet_food_row xml file*/
         holder.foodName.setText(fCurrent.getFoodName());
         holder.foodCalories.setText("" + fCurrent.getFoodCalories());
-        holder.foodDate.setText("" + fCurrent.getFoodDate());
     }
 
     @Override
@@ -76,16 +75,13 @@ public class DietFoodAdapter extends RecyclerView.Adapter<DietFoodAdapter.MyView
         /*stuff that i want to be displayed in the recyclerview*/
         TextView foodName;
         TextView foodCalories;
-        TextView foodDate;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             foodName = (TextView) itemView.findViewById(R.id.foodView);
             foodCalories = (TextView) itemView.findViewById(R.id.caloriesView);
-            foodDate = (TextView) itemView.findViewById(R.id.dateView);
             foodName.setOnClickListener(this);
             foodCalories.setOnClickListener(this);
-            foodDate.setOnClickListener(this);
 
             //set the listeners for when you swipe right on a item in the list
             foodName.setOnTouchListener(new OnSwipeTouchListener(foodContext) {
@@ -94,11 +90,6 @@ public class DietFoodAdapter extends RecyclerView.Adapter<DietFoodAdapter.MyView
                 }
             });
             foodCalories.setOnTouchListener(new OnSwipeTouchListener(foodContext) {
-                public void onSwipeRight() {
-                    deleteFoodDialog();
-                }
-            });
-            foodDate.setOnTouchListener(new OnSwipeTouchListener(foodContext) {
                 public void onSwipeRight() {
                     deleteFoodDialog();
                 }
