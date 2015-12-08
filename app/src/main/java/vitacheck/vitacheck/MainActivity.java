@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case 6:
                 //Search goes here.
                 //If its a fragment:
-                //fragment = new SearchFragment(); or whatever its called
+                fragment = new SearchFragment();
                 //If its an activity:
                 //Intent profileIntent = new Intent(this ,ProfileActivity.class);
                 //this.startActivity(profileIntent);
